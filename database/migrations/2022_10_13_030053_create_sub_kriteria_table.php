@@ -20,7 +20,9 @@ class CreateSubKriteriaTable extends Migration
             $table->string('nama_sub_kriteria',40);
             $table->decimal('bobot_sub_kriteria',18,4);
             $table->integer('nilai_perbandingan_sub_kriteria');
+            $table->timestamps();
             $table->foreign('id_kriteria')->references('id_kriteria')->on('kriteria_ahp')->onUpdate('cascade')->onDelete('restrict');
+            
         });
     }
 

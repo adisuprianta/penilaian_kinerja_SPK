@@ -28,6 +28,8 @@ Route::group(['middleware' => ['auth', 'role:manajer']], function() {
     Route::resource('/karyawan','App\Http\Controllers\KaryawanController')->except(['show','create']);
     Route::get('/karyawan/create', 'App\Http\Controllers\KaryawanController@create')->name('karyawan.create');
 
+    Route::resource('/user','App\Http\Controllers\UserController')->except(['show','create']);
+    Route::get('/user/create', 'App\Http\Controllers\UserController@create')->name('user.create');
 });
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

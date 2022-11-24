@@ -13,11 +13,12 @@ class CreateKriteriaTable extends Migration
      */
     public function up()
     {
-        Schema::create('kriteria', function (Blueprint $table) {
+        Schema::create('kriteria_ahp', function (Blueprint $table) {
             $table->increments('id_kriteria');
-            $table->string('Nama_kriteria',20);
+            $table->string('nama_kriteria',20);
             $table->decimal('bobot_kriteria', 18,4);
-            $table->integer('Nilai_perbandingan_kriteria');
+            $table->integer('nilai_perbandingan_kriteria');
+            $table->timestamps();
         });
     }
 

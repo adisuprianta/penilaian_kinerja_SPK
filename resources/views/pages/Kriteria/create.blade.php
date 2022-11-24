@@ -1,21 +1,27 @@
 @extends('layouts.default')
-@section('title','Tambah Pengeluaran')
-@section('header-title','Tambah Pengeluaran')
+@section('title','Tambah Kriteria')
+@section('header-title','Tambah Kriteria')
 
 @section('content')
 <div class="card shadow mb-4 col-lg-6">
     <div class="card-body">
-        @if (session()->has('pesan'))
-        <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <p>{{ session()->get('pesan') }}</p>
-        </div>
-        @endif
+        <br/>
+        {{-- menampilkan error validasi --}}
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                    </ul>
+                </div>
+            @endif
 
+        <br/>
         <form action="{{route('kriteria.store')}}" method="post">
             @csrf
             <div class="form-group">
-                <label for="jumlah">kriteria</label>
+                <label for="Kriteria">Nama Kriteria</label>
                 <input type="text" name="kriteria" class="form-control @error('jumlah') is-invalid @enderror">
                 @error('kriteria')
                 <div class="text-danger">
@@ -25,9 +31,9 @@
             </div>
             
             <div class="form-group">
-                <label for="Bobot">Bobot</label>
-                <input name="bobot" rows="3" id="bobot" class="form-control @error('perincian') is-invalid @enderror"></input>
-                @error('bobot')
+                <label for="Nilai Bobot">Nilai Perbandingan Kriteria</label>
+                <input name="nilai" rows="3" id="nilai" class="form-control @error('perincian') is-invalid @enderror"></input>
+                @error('nilai')
                 <div class="text-danger">
                     {{ $message }}
                 </div>

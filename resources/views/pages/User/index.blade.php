@@ -6,7 +6,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                <a href="{{route('karyawan.create')}}" class="btn btn-success mb-4">
+                <a href="{{route('user.create')}}" class="btn btn-success mb-4">
                     Tambah
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </a>
@@ -14,15 +14,38 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Nama Kriteria</th>
-                            <th>Bobot</th>
-                            <th>Nilai Perbandingan Kriteria</th>
-                            <th>Sub kriteria</th>
+                            <th>Nama User</th>
+                            <th>Email</th>
+                            <th>Role</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                       
+                        
+                        @foreach($user as $u)
+                            <tr>
+                                <td>{{ $loop->iteration }}.</td>
+                                <td>{{$u ->name}}</td>
+                                <td>{{$u->email}}</td>
+                                <td>{{$u->display_name}}</td>
+                                <td>
+                                    <a class="btn btn-info btn-sm mb-1 mr-1 d-inline" href="">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Ubah
+                                    </a>
+                                    <form action="" method="post" class="d-inline" id="{{'form-hapus-transaksi-'.$u->id}}">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="btn btn-danger btn-sm btn-hapus" data-id="{{$u->id}}"  type="submit">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
