@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Kriteria;
+use App\Models\SubKriteria;
+use Illuminate\Http\Request;
 use Session;
-class KriteriaController extends Controller
+class SubKriteriaController extends Controller
 {
+    // public function index(){
+    //     return "AAAA";
+    // }
     public function show($id){
-            return view("pages.subkriteria.index");
-        }
-    public function index(){
-        $kriteria = Kriteria::get();
-        return view('pages.kriteria.index',['kriteria'=>$kriteria]);
+        // return "a";
+        $subkriteria = SubKriteria::where("id_kriteria",$id)->get();
+        return view("pages.subkriteria.index",["id"=>$id,"subkriteria"=>$subkriteria]);
     }
-    public function create(){
-        return view('pages.kriteria.create');
+    public function create($id){
+        return view("pages.subkriteria.create",["id"=>$id]);
     }
-    public function store(Request $request){
+    public function masukandata($id,Request $request){
         $messages = [
             'required' => ':semua data wajib diisi!!!',
             'between' => 'Nilai harus di isi dari :min - :max bukan :input!!!',
@@ -29,19 +31,20 @@ class KriteriaController extends Controller
             'nilai' => ['required', 'numeric','between: 1,100' ],
         ],$messages);
 
-        Kriteria::create([
-            'nama_kriteria' => $request->kriteria,
-            'nilai_perbandingan_kriteria' =>$request->nilai,
-            'bobot_kriteria'=>"0",
+        SubKriteria::create([
+            'id_kriteria'=> $id,
+            'nama_sub_kriteria' => $request->kriteria,
+            'nilai_perbandingan_sub_kriteria' =>$request->nilai,
+            'bobot_sub_kriteria'=>"0",
         ]);
-        $this->HitungBobotKriteria();
+        $this->HitungBobotSubKriteria($id);
 
         Session::flash('sukses','Berhasil menginputkan data');
-        return redirect('/kriteria');
+        return redirect(route('sub_kriteria.show',$id));
+        // return $request->kriteria;
     }
-
-    public function HitungBobotKriteria(){
-        $kriteria = Kriteria::get();
+    public function HitungBobotSubKriteria($id){
+        $kriteria = SubKriteria::where("id_kriteria",$id)->get();
         $row = 0; 
         $con = 0;
         
@@ -50,7 +53,7 @@ class KriteriaController extends Controller
         foreach($kriteria as $k){
             $con = 0;
             foreach($kriteria as $kri){
-                $matriks[$row][$con] = $k->nilai_perbandingan_kriteria/$kri->nilai_perbandingan_kriteria;
+                $matriks[$row][$con] = $k->nilai_perbandingan_sub_kriteria/$kri->nilai_perbandingan_sub_kriteria;
                 $con++;
             }
             $row++;
@@ -93,8 +96,8 @@ class KriteriaController extends Controller
         }
         $row=0;
         foreach($kriteria as $k){
-            Kriteria::where('id_kriteria',$k->id_kriteria)->update([
-                    "bobot_kriteria"=>$bobot[$row],
+            SubKriteria::where('id_sub_kriteria',$k->id_sub_kriteria)->update([
+                    "bobot_sub_kriteria"=>$bobot[$row],
             ]);
             $row++;
         }

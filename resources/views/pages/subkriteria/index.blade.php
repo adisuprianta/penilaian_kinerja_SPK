@@ -26,7 +26,7 @@
                     <strong>{{ $message }}</strong>
                 </div>
                 @endif
-                <a href="{{route('kriteria.create')}}" class="btn btn-success mb-4">
+                <a href="{{route('sub_kriteria.create',$id)}}" class="btn btn-success mb-4">
                     Tambah
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </a>
@@ -34,26 +34,19 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Nama Kriteria</th>
+                            <th>Nama Sub Kriteria</th>
                             <th>Bobot</th>
                             <th>Nilai Kriteria</th>
-                            <th>Sub kriteria</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($kriteria as $k)
+                    @foreach ($subkriteria as $k)
                         <tr>
                             <td>{{ $loop->iteration }}.</td>
-                            <td>{{$k->nama_kriteria}}</td>
-                            <th>{{$k->bobot_kriteria}}</th>
-                            <th>{{$k->nilai_perbandingan_kriteria}}</th>
-                            <th>
-                                <a class="btn btn-info btn-sm mb-1 mr-1 d-inline" href="{{route('sub_kriteria.show',$k->id_kriteria)}}">
-                                <i class="fas fa-arrow-right"></i>
-                                    Cek Sub Kriteria
-                                </a>
-                            </th>
+                            <td>{{$k->nama_sub_kriteria}}</td>
+                            <th>{{$k->bobot_sub_kriteria}}</th>
+                            <th>{{$k->nilai_perbandingan_sub_kriteria}}</th>
                             <th>
                                 <a class="btn btn-info btn-sm mb-1 mr-1 d-inline" href="">
                                     <i class="fas fa-pencil-alt">
@@ -70,7 +63,7 @@
                                     </form>
                             </th>
                         </tr>
-                        @endforeach
+                    @endforeach
                     </tbody>
                 </table>
             </div>
