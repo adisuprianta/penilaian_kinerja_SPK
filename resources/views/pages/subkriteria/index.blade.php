@@ -1,6 +1,6 @@
 @extends('layouts.default')
-@section('title','Data Kriteria')
-@section('header-title','Data Kriteria')
+@section('title','Data Sub Kriteria')
+@section('header-title','Data Sub Kriteria')
 
 @section('content')
     <div class="card shadow mb-4">
@@ -48,7 +48,7 @@
                             <th>{{$k->bobot_sub_kriteria}}</th>
                             <th>{{$k->nilai_perbandingan_sub_kriteria}}</th>
                             <th>
-                                <a class="btn btn-info btn-sm mb-1 mr-1 d-inline" href="">
+                                <a class="btn btn-info btn-sm mb-1 mr-1 d-inline" href="{{route('sub_kriteria.edit',$k->id_sub_kriteria)}}">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Ubah

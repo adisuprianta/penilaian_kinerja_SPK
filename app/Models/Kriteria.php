@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kriteria extends Model
 {
     protected $table = 'kriteria_ahp';
+    protected $primaryKey= "id_kriteria";
     public $guarded = [];
 
 }

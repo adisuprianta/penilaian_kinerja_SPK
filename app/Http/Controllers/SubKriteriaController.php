@@ -102,4 +102,31 @@ class SubKriteriaController extends Controller
             $row++;
         }
     }
+
+    public function edit($id){
+        $subkriteria = SubKriteria::find($id);
+        return view("pages.subkriteria.edit",["id"=>$id,"subkriteria"=>$subkriteria]);
+    }
+    public function update($id, Request $request){
+        $messages = [
+            'required' => ':semua data wajib diisi!!!',
+            'between' => 'Nilai harus di isi dari :min - :max bukan :input!!!',
+            'min' => ':nilai harus diisi minimal :min karakter!!!',
+            'max' => ':nilai harus diisi maksimal :max karakter!!!',
+        ];
+        $request->validate([
+            'kriteria' => ['required', 'string', 'max:255'],
+            'nilai' => ['required', 'numeric','between: 1,100' ],
+        ],$messages);
+
+        SubKriteria::where("id_sub_kriteria",$id)->update([
+            'nama_sub_kriteria' => $request->kriteria,
+            'nilai_perbandingan_sub_kriteria' =>$request->nilai,
+        ]);
+        $id_kriteria=SubKriteria::find($id);
+        $this->HitungBobotSubKriteria($id_kriteria->id_kriteria);
+
+        Session::flash('sukses','Berhasil mengupdate data');
+        return redirect(route('sub_kriteria.show',$id_kriteria->id_kriteria));
+    }
 }

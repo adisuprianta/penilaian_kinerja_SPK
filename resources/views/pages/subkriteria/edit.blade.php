@@ -1,6 +1,6 @@
 @extends('layouts.default')
-@section('title','Tambah Sub Kriteria')
-@section('header-title','Tambah Sub Kriteria')
+@section('title','Edit Sub Kriteria')
+@section('header-title','Edit Sub Kriteria')
 
 @section('content')
 <div class="card shadow mb-4 col-lg-6">
@@ -18,12 +18,12 @@
             @endif
 
         <br/>
-        <form action="{{route('sub_kriteria.masukandata',$id)}}" method="post">
+        <form action="{{route('sub_kriteria.update',$id)}}" method="post">
         @method('PUT')
         @csrf
             <div class="form-group">
                 <label for="Kriteria">Nama Sub Kriteria</label>
-                <input type="text" name="kriteria" class="form-control @error('jumlah') is-invalid @enderror">
+                <input type="text" name="kriteria" class="form-control @error('jumlah') is-invalid @enderror" value="{{$subkriteria->nama_sub_kriteria}}">
                 @error('kriteria')
                 <div class="text-danger">
                     {{ $message }}
@@ -33,7 +33,7 @@
             
             <div class="form-group">
                 <label for="Nilai Bobot">Nilai Perbandingan Sub Kriteria</label>
-                <input name="nilai" rows="3" id="nilai" class="form-control @error('perincian') is-invalid @enderror"></input>
+                <input name="nilai" rows="3" id="nilai" class="form-control @error('perincian') is-invalid @enderror" value="{{$subkriteria->nilai_perbandingan_sub_kriteria}}"></input>
                 @error('nilai')
                 <div class="text-danger">
                     {{ $message }}

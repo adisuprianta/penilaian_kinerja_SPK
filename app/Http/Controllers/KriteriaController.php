@@ -99,4 +99,29 @@ class KriteriaController extends Controller
             $row++;
         }
     }
+    public function edit($id){
+        $kriteria = Kriteria::find($id);
+        return view("pages.kriteria.edit",["id"=>$id,"kriteria"=>$kriteria]);
+    }
+    public function update($id, Request $request){
+        $messages = [
+            'required' => ':semua data wajib diisi!!!',
+            'between' => 'Nilai harus di isi dari :min - :max bukan :input!!!',
+            'min' => ':nilai harus diisi minimal :min karakter!!!',
+            'max' => ':nilai harus diisi maksimal :max karakter!!!',
+        ];
+        $request->validate([
+            'kriteria' => ['required', 'string', 'max:255'],
+            'nilai' => ['required', 'numeric','between: 1,100' ],
+        ],$messages);
+
+        Kriteria::where("id_kriteria",$id)->update([
+            'nama_kriteria' => $request->kriteria,
+            'nilai_perbandingan_kriteria' =>$request->nilai,
+        ]);
+        $this->HitungBobotSubKriteria();
+
+        Session::flash('sukses','Berhasil mengupdate data');
+        return redirect(route('kriteria.index'));
+    }
 }

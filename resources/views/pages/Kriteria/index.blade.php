@@ -55,7 +55,7 @@
                                 </a>
                             </th>
                             <th>
-                                <a class="btn btn-info btn-sm mb-1 mr-1 d-inline" href="">
+                                <a class="btn btn-info btn-sm mb-1 mr-1 d-inline" href="{{route('kriteria.edit',$k->id_kriteria)}}">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Ubah
