@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Validation\Rules;
 
 class UserController extends Controller
@@ -44,5 +45,11 @@ class UserController extends Controller
 
         return redirect("/user");
     }
+    public function destroy($id){
+        $user=User::find($id);
+        $user->delete();
 
+        Alert::success('Sukses', "User dengan nama {$user->name} berhasil dihapus");
+        return redirect()->back();
+    }
 }

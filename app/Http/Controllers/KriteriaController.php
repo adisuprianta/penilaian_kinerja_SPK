@@ -124,4 +124,8 @@ class KriteriaController extends Controller
         Session::flash('sukses','Berhasil mengupdate data');
         return redirect(route('kriteria.index'));
     }
+
+    public function destroy($id){
+        return redirect()->back();
+    }
 }

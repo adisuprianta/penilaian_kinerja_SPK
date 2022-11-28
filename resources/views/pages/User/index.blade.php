@@ -34,10 +34,10 @@
                                         </i>
                                         Ubah
                                     </a>
-                                    <form action="" method="post" class="d-inline" id="{{'form-hapus-transaksi-'.$u->id}}">
+                                    <form action="{{route('user.destroy',$u->id)}}" method="post" class="d-inline" id="{{'form-hapus-user-'.$u->id}}">
                                         @method('DELETE')
                                         @csrf
-                                        <button class="btn btn-danger btn-sm btn-hapus" data-id="{{$u->id}}"  type="submit">
+                                        <button class="btn btn-danger btn-sm btn-hapus" data-id="{{$u->id}}" data-username="{{$u->name}}"  type="submit">
                                             <i class="fas fa-trash">
                                             </i>
                                             Hapus
@@ -65,7 +65,7 @@
 
     <!-- Page level custom scripts -->
     <script src="{{asset('assets/js/demo/datatables-demo.js')}}"></script>
-    
+    @include('sweetalert::alert')php artisan sweetalert:publish
     <script>
         $('.btn-hapus').on('click', function(e){
             e.preventDefault();
