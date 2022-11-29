@@ -65,6 +65,14 @@
 
             <div class="form-group">
                 <label for="Bobot">Tanggal Kerja</label>
+                <div class="input-group date" id="datepicker">
+                        <input type="text" class="form-control">
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-white">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>
+                    </div>
                 <input name="tgl_kerja" rows="3" id="tgl_kerja" class="form-control @error('perincian') is-invalid @enderror"></input>
                 @error('tgl_kerja')
                 <div class="text-danger">

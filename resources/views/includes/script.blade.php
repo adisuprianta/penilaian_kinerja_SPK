@@ -8,3 +8,9 @@
     <!-- Custom scripts for all pages-->
     <script src="{{asset('assets/js/sb-admin-2.min.js')}}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#datepicker').datepicker();
+        });
+    </script>
