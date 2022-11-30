@@ -37,7 +37,7 @@ class KriteriaController extends Controller
         $this->HitungBobotKriteria();
 
         Session::flash('sukses','Berhasil menginputkan data');
-        return redirect('/kriteria');
+        return redirect(route('kriteria.index'));
     }
 
     public function HitungBobotKriteria(){
