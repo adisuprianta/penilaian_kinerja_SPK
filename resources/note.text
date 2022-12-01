@@ -1,0 +1,3 @@
+buat tabel pekerjaan
+lalu buat tabel yang merenyambungkan antar tabel pekerjaan dan karyawan bernama pekerjaan_karyawan;
+setelah itu buat tabel penyelesaian pekerjaan seteiap hari yang relasi dengan tabel pekerjaan_karyawan bernama penyelesaian_pekerjaan

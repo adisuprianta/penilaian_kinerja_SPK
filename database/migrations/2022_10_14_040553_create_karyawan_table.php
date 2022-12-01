@@ -19,7 +19,7 @@ class CreateKaryawanTable extends Migration
             $table->string('email',100);
             $table->string('no_hp',13);
             $table->char('jenis_kelamin',1);
-            $table->string('alamat',100);
+            $table->string('alamat',200);
             // $table->date('tanggal_kerja');
             $table->date('tanggal_lahir');
             // $table->string('status',200);

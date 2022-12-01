@@ -30,17 +30,17 @@
                     Tambah
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </a>
-                <table class="table table-striped table-bordered" id="dataTable">
+                <table class="table table-striped table-bordered " id="dataTable">
                     <thead>
                         <tr>
-                            <th>No.</th>
-                            <th>Nama Karyawan</th>
-                            <th>Email</th>
-                            <th>No Hp</th>
-                            <th>Jenis Kelamin</th>
-                            <th>Alamat</th>
-                            <th>Tanggal Lahir</th>
-                            <th>Action</th>
+                            <th scope="col">No.</th>
+                            <th scope="col">Nama Karyawan</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">No Hp</th>
+                            <th scope="col">Jenis Kelamin</th>
+                            <th scope="col">Alamat</th>
+                            <th scope="col">Tanggal Lahir</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,7 +58,7 @@
                             <th>{{$k->alamat}}</th>
                             <th>{{$k->tanggal_lahir}}</th>
                             
-                            <th>
+                            <th >
                                 <a class="btn btn-info btn-sm mb-1 mr-1 d-inline" href="{{route('karyawan.edit',$k->id_karyawan)}}">
                                     <i class="fas fa-pencil-alt">
                                     </i>
