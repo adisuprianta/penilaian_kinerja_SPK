@@ -1,3 +1,8 @@
 buat tabel pekerjaan
 lalu buat tabel yang merenyambungkan antar tabel pekerjaan dan karyawan bernama pekerjaan_karyawan;
 setelah itu buat tabel penyelesaian pekerjaan seteiap hari yang relasi dengan tabel pekerjaan_karyawan bernama penyelesaian_pekerjaan
+buat tabel pangkat dari karyawan, pangkat ada karyawan dan team leader
+
+tabel untuk menyambungkan antar user dan karyawan untuk mengetahui siapa yang menilai karyawan.  tabel bernama penilai_karyawan
+
+buat change password
