@@ -15,6 +15,7 @@ class CreateKaryawanTable extends Migration
     {
         Schema::create('karyawan', function (Blueprint $table) {
             $table->increments('id_karyawan');
+            $table->unsignedInteger('id_pangkat');
             $table->string('nama_karyawan',30);
             $table->string('email',100);
             $table->string('no_hp',13);
@@ -25,6 +26,8 @@ class CreateKaryawanTable extends Migration
             // $table->string('status',200);
             // $table->string('nama_berkas_kontrak',200);
             $table->timestamps();
+            $table->foreign('id_pangkat')->references('id_pangkat_karyawan')->on('pangkat_karyawan')
+            ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

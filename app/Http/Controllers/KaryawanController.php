@@ -3,19 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\karyawan;
+use App\Models\Pangkat_karyawan;
+use App\Models\Pekerjaan;
+use App\Models\Pekerjaan_karyawan;
 use Illuminate\Http\Request;
 use Session;
 use Carbon\Carbon;
+use Database\Seeders\PangkatSeeder;
 use Validator;
 
 class KaryawanController extends Controller
 {
+    public function show($id){
+        // return "a";
+        $karyawan=karyawan::select('nama_karyawan')->find($id);
+        $pekerjaan = Pekerjaan::get();
+        return view("pages.pekerjaan_karyawan.index",["id"=>$id,"pekerjaan"=>$pekerjaan,'karyawan'=>$karyawan]);
+    }
     public function index(){
-        $karyawan=karyawan::get();
+        $karyawan=karyawan::join('pangkat_karyawan','id_pangkat','=','id_pangkat_karyawan')->get();
         return view('pages.karyawan.index',['karyawan'=>$karyawan]);
     }
     public function create(){
-        return view('pages.karyawan.create');
+        $pangkat = Pangkat_karyawan::get();
+        return view('pages.karyawan.create',["pangkat"=>$pangkat]);
     }
     public function store(Request $request){
         $messages= [
@@ -28,15 +39,17 @@ class KaryawanController extends Controller
         ];
         $request->validate([
             'nama_karyawan' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:karyawan'],
             'nohp' => ['required', 'numeric' ],
             'jkel'=> ['required'],
             'alamat'=>['required','string','max:200'],
+            'pangkat'=>['required'],
             // 'tgl_kerja'=>['required','date'],
             'tgl_lahir'=>['required','date'],
             // 'status'=> ['required'],
             // 'berkas'=> ['required|mimes:pdf,docx|max:2048'],
         ],$messages);
+        // dd($request->all());
     //     $tes= Carbon::parse($request->tgl_lahir)->format('Y-m-d') ;
     //     // dd($tes);
     //    dd(Carbon::parse($tes)->format(config('app.date_format')));
@@ -49,6 +62,7 @@ class KaryawanController extends Controller
         // // echo $nama_berkas;
         $karyawan = karyawan::create([
             'nama_karyawan' => $request->nama_karyawan,
+            'id_pangkat'=>$request->pangkat,
             'email' => $request->email,
             'no_hp' => $request->nohp,
             'jenis_kelamin'=> $request->jkel,
@@ -61,8 +75,9 @@ class KaryawanController extends Controller
         return redirect(route('karyawan.index'));
     }
     public function edit($id){
+        $pangkat = Pangkat_karyawan::get();
         $karyawan= karyawan::find($id);
-        return view("pages.karyawan.edit",["karyawan"=>$karyawan]);
+        return view("pages.karyawan.edit",["karyawan"=>$karyawan,"pangkat"=>$pangkat]);
     }
     public function update($id,Request $request){
         $messages= [
@@ -75,10 +90,11 @@ class KaryawanController extends Controller
         ];
         $request->validate([
             'nama_karyawan' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:karyawan'],
             'nohp' => ['required', 'numeric' ],
             'jkel'=> ['required'],
             'alamat'=>['required','string','max:200'],
+            'pangkat'=>['required'],
             // 'tgl_kerja'=>['required','date'],
             'tgl_lahir'=>['required','date'],
             // 'status'=> ['required'],
@@ -87,6 +103,7 @@ class KaryawanController extends Controller
 
         karyawan::where('id_karyawan',$id)->update([
             'nama_karyawan' => $request->nama_karyawan,
+            'id_pangkat'=>$request->pangkat,
             'email' => $request->email,
             'no_hp' => $request->nohp,
             'jenis_kelamin'=> $request->jkel,

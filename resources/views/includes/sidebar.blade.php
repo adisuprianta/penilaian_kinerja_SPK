@@ -51,9 +51,9 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{route('pekerjaan.index')}}">
             <i class="fas fa-minus"></i>
-            <span><b>Kontrak Kerja</b></span>
+            <span><b>Pekerjaan Karyawan</b></span>
         </a>
     </li>
     <!-- Divider -->

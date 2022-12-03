@@ -16,11 +16,11 @@ class CreatePekerjaanKaryawanTable extends Migration
         Schema::create('pekerjaan_karyawan', function (Blueprint $table) {
             $table->unsignedinteger('id_karyawan');
             $table->unsignedinteger('id_pekerjaan');
+            $table->timestamps();
             $table->foreign('id_pekerjaan')->references('id_pekerjaan')->on('pekerjaan')
             ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('id_karyawan')->references('id_karyawan')->on('karyawan')
-            ->onUpdate('cascade')->onDelete('cascade');
-            $table->primary(['id_pekerjaan', 'id_karyawan']);
+            
+            $table->primary(['id_karyawan', 'id_pekerjaan']);
         });
     }
 

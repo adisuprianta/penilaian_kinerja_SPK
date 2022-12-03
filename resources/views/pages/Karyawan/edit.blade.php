@@ -42,6 +42,25 @@
                 </div>
                 @enderror
             </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlSelect2">Pangkat Karyawan</label>
+                <select class="form-control @error('pangkat') is-invalid @enderror" name="pangkat" id="pangkat" >
+                    @foreach($pangkat as $p)
+                    @if($p->id_pangkat_karyawan==$karyawan->id_pangkat)
+                            <option value="{{$p->id_pangkat_karyawan}}" selected>{{$p->nama_pangkat}}</option>
+                        @else
+                        <option value="{{$p->id_pangkat_karyawan}}" >{{$p->nama_pangkat}}</option>
+                        @endif
+                    @endforeach
+                </select>
+                @error('pangkat')
+                <div class="text-danger">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+
             <fieldset class="form-group">
                 <div class="row">
                 <legend class="col-form-label col-sm-4 pt-0">Jenis Kelamin</legend>
