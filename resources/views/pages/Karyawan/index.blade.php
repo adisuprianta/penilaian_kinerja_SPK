@@ -30,6 +30,10 @@
                     Tambah
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </a>
+                <!-- <a href="" class="btn btn-success mb-4">
+                    Kontrak Kerja
+                    <i class="fa fa-file-signature"></i>
+                </a> -->
                 <table class="table table-striped table-bordered " id="dataTable">
                     <thead>
                         <tr>
@@ -38,6 +42,7 @@
                             <th scope="col">Email</th>
                             <th scope="col">No Hp</th>
                             <th scope="col">Pangkat Karyawan</th>
+                            <th scope="col">Perusahaan</th>
                             <th scope="col">Jenis Kelamin</th>
                             <th scope="col">Alamat</th>
                             <th scope="col">Tanggal Lahir</th>
@@ -53,6 +58,7 @@
                             <th>{{$k->email}}</th>
                             <th>{{$k->no_hp}}</th>
                             <th>{{$k->nama_pangkat}}</th>
+                            <th>{{$k->nama_perusahaan}}</th>
                             @if($k->jenis_kelamin == "L")
                             <th>Laki Laki</th>
                             @elseif($k->jenis_kelamin == "P")
@@ -61,23 +67,23 @@
                             <th>{{$k->alamat}}</th>
                             <th>{{$k->tanggal_lahir}}</th>
                             <th>
-                                <a class="btn btn-info btn-sm " href="{{route('karyawan.show',$k->id_karyawan)}}">
-                                <i class="fas fa-arrow-right"></i>
-                                    Cek Jobdesk
+                                <a class="btn btn-info btn-sm w-100 h-100" href="{{route('karyawan.show',$k->id_karyawan)}}">
+                                <i class="fas fa-arrow-right "></i>
+                                   <span>Cek Jobdesk</span>
                                 </a>
                             </th>
                             <th >
-                            <div class="d-flex justify-content-center">
-                                <a class="btn btn-info " href="{{route('karyawan.edit',$k->id_karyawan)}}">
+                            <div class="d-flex justify-content-end">
+                                <a class="btn btn-info btn-sm w-100 h-100 "  href="{{route('karyawan.edit',$k->id_karyawan)}}">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Ubah
                                 </a>
-                                <form action="{{route('karyawan.destroy',$k->id_karyawan)}}" method="post" class="d-inline" id="{{'form-hapus-karyawan-'.$k->id_karyawan}}">
+                                <form action="{{route('karyawan.destroy',$k->id_karyawan)}}" method="post" class="ml-2 d-inline" id="{{'form-hapus-karyawan-'.$k->id_karyawan}}">
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger btn-sm btn-hapus" data-id="{{$k->id_karyawan}}" data-username="{{$k->nama_karyawan}}"  type="submit">
-                                        <i class="fas fa-trash"></i>
+                                    <button class="btn btn-danger btn-sm  btn-hapus w-100 h-100" data-id="{{$k->id_karyawan}}" data-username="{{$k->nama_karyawan}}"  type="submit">
+                                    <i class="fas fa-trash"></i> 
                                         Hapus
                                     </button>
                                     </form>

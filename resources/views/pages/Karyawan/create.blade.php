@@ -41,10 +41,24 @@
                 </div>
                 @enderror
             </div>
-
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Perusahaan</label>
+                <select class="form-control  @error('perusahaan') is-invalid @enderror" name="perusahaan" id="perusahaan">
+                    <option selected></option>
+                    @foreach($perusahaan as $p)
+                        <option value="{{$p->id_perusahaan}}">{{$p->nama_perusahaan}}</option>
+                    @endforeach
+                </select>
+                @error('perusahaan')
+                <div class="text-danger">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect2">Pangkat Karyawan</label>
                 <select class="form-control @error('pangkat') is-invalid @enderror" name="pangkat" id="pangkat" >
+                    <option selected></option>
                     @foreach($pangkat as $p)
                     <option value="{{$p->id_pangkat_karyawan}}">{{$p->nama_pangkat}}</option>
                     @endforeach
@@ -137,7 +151,7 @@
                         </div>
                     </div>
                 </div>
-            </fieldset> -->
+            </fieldset>  -->
             <!-- <div class="form-group">
                 <label for="Bobot">Berkas Kontrak</label>
                 <input type="file" name="berkas" rows="3" id="berkas" class="form-control-file @error('berkas') is-invalid @enderror"></input>

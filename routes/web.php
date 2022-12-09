@@ -34,8 +34,11 @@ Route::group(['middleware' => ['auth', 'role:manajer']], function() {
     //     return "dsadas";
     // })->name('kriteria.show');
 
-    Route::resource('/pekerjaan','App\Http\Controllers\PekerjaanController');
-
+    Route::resource('/pekerjaan_karyawan','App\Http\Controllers\PekerjaanController');
+    Route::get('/pekerjaan_karyawan/create/{id}','App\Http\Controllers\PekerjaanController@create')->name('pekerjaan_karyawan.create');
+    Route::post('/pekerjaan_karyawan/store/{id}','App\Http\Controllers\PekerjaanController@store')->name('pekerjaan_karyawan.store');
+ 
+    Route::resource('/perusahaan','App\Http\Controllers\PerusahaanController');
     Route::resource('/karyawan','App\Http\Controllers\KaryawanController');
     Route::get('/karyawan/create', 'App\Http\Controllers\KaryawanController@create')->name('karyawan.create');
 

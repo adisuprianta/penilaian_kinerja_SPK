@@ -14,13 +14,13 @@ class CreatePekerjaanKaryawanTable extends Migration
     public function up()
     {
         Schema::create('pekerjaan_karyawan', function (Blueprint $table) {
+            $table->increments('id_pekerjaan');
             $table->unsignedinteger('id_karyawan');
-            $table->unsignedinteger('id_pekerjaan');
+            $table->string("nama_pekerjaan");
             $table->timestamps();
-            $table->foreign('id_pekerjaan')->references('id_pekerjaan')->on('pekerjaan')
+            $table->foreign('id_karyawan')->references('id_karyawan')->on('karyawan')
             ->onUpdate('cascade')->onDelete('cascade');
             
-            $table->primary(['id_karyawan', 'id_pekerjaan']);
         });
     }
 

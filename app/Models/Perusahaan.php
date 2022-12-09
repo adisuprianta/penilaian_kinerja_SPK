@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pekerjaan_karyawan extends Model
+class Perusahaan extends Model
 {
-    protected $table = 'pekerjaan_karyawan';
-    protected $primaryKey= "id_pekerjaan";
+    protected $table = 'Perusahaan_partner';
+    protected $primaryKey= "id_perusahaan";
     public $guarded = [];
 }

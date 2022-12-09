@@ -18,18 +18,27 @@
             @endif
 
         <br/>
-        <form action="{{route('pekerjaan.store')}}" method="post">
+        <form action="{{route('perusahaan.update',$perusahaan->id_perusahaan)}}" method="post">
+            @method('PUT')
             @csrf
             <div class="form-group">
-                <label for="Kriteria">Nama Pekerjaan</label>
-                <input type="text" name="kriteria" class="form-control @error('jumlah') is-invalid @enderror">
-                @error('kriteria')
+                <label for="Kriteria">Nama Perusahaan</label>
+                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{$perusahaan->nama_perusahaan}}">
+                @error('nama')
                 <div class="text-danger">
                     {{ $message }}
                 </div>
                 @enderror
             </div>
-
+            <div class="form-group">
+                <label for="Kriteria">Alamat</label>
+                <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{$perusahaan->alamat_perusahaan}}">
+                @error('alamat')
+                <div class="text-danger">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
             <button type="submit" class="btn btn-success">Kirim</button>
         </form>
 

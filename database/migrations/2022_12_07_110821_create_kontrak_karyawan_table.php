@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePenyelesaianPekerjaanTable extends Migration
+class CreateKontrakKaryawanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreatePenyelesaianPekerjaanTable extends Migration
      */
     public function up()
     {
-        Schema::create('penyelesaian_pekerjaan', function (Blueprint $table) {
-            $table->increments('id_penyelesaian_pekerjaan');
-            $table->unsignedinteger('id_pekerjaan');
+        Schema::create('kontrak_karyawan', function (Blueprint $table) {
+            $table->increments('id_kontrak');
+            $table->unsignedinteger('id_karyawan');
+            $table->date('tanggal_masuk');
             $table->date('tanggal_kerja');
+            $table->string('Berkas_kontrak');
             $table->char('status',1);
-            $table->foreign('id_pekerjaan')->references('id_pekerjaan')->on('pekerjaan_karyawan')
+            $table->foreign('id_karyawan')->references('id_karyawan')->on('karyawan')
             ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
@@ -31,6 +33,6 @@ class CreatePenyelesaianPekerjaanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('penyelesaian_pekerjaan');
+        Schema::dropIfExists('kontrak_karyawan');
     }
 }

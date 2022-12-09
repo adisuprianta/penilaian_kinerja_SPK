@@ -42,7 +42,25 @@
                 </div>
                 @enderror
             </div>
-
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Perusahaan</label>
+                <select class="form-control  @error('perusahaan') is-invalid @enderror" name="perusahaan" id="perusahaan">
+                    <option selected></option>
+                    @foreach($perusahaan as $p)
+                        @if($p->id_perusahaan==$karyawan->id_perusahaan)
+                            <option value="$p->id_perusahaan" selected>{{$p->nama_perusahaan}}</option>
+                        @else
+                            <option value="$p->id_perusahaan">{{$p->nama_perusahaan}}</option>
+                        @endif
+                        
+                    @endforeach
+                </select>
+                @error('perusahaan')
+                <div class="text-danger">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect2">Pangkat Karyawan</label>
                 <select class="form-control @error('pangkat') is-invalid @enderror" name="pangkat" id="pangkat" >
@@ -61,7 +79,7 @@
                 @enderror
             </div>
 
-            <fieldset class="form-group">
+            <!-- <fieldset class="form-group">
                 <div class="row">
                 <legend class="col-form-label col-sm-4 pt-0">Jenis Kelamin</legend>
                     <div class="col-sm-7">
@@ -92,6 +110,39 @@
                             </label>
                         @endif
                         </div>
+                    </div>
+                </div>
+            </fieldset>  -->
+            <fieldset class="form-group">
+                <div class="row">
+                <legend class="col-form-label col-sm-4 pt-0">Jenis Kelamin</legend>
+                    <div class="col-sm-7">
+                    @if($karyawan->jenis_kelamin=="L")
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="jkel" id="jkel" value="L" checked>
+                            <label class="form-check-label" for="gridRadios1">
+                                Laki Laki
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="jkel" id="jkel" value="P">
+                            <label class="form-check-label" for="gridRadios2">
+                                Perempuan
+                            </label>
+                        </div>
+                        @elseif($karyawan->jenis_kelamin=="P")
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="jkel" id="jkel" value="L" >
+                            <label class="form-check-label" for="gridRadios1">
+                                Laki Laki
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="jkel" id="jkel" value="P" checked>
+                            <label class="form-check-label" for="gridRadios2">
+                                Perempuan
+                            </label>
+                        @endif
                     </div>
                 </div>
             </fieldset>

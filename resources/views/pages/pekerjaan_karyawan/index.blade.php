@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('title','Data Pekerjaan Karyawan')
-@section('header-title','Data Pekerjaan Karyawan'.$karyawan->nama_karyawan)
+@section('header-title','Data Pekerjaan Karyawan '.$karyawan->nama_karyawan)
 
 @section('content')
     <div class="card shadow mb-4">
@@ -26,10 +26,10 @@
                     <strong>{{ $message }}</strong>
                 </div>
                 @endif
-                <!-- <a href="route('pekerjaan_karyawan.create',$id)" class="btn btn-success mb-4">
+                <a href="{{route('pekerjaan_karyawan.create',$id)}}" class="btn btn-success mb-4">
                     Tambah
                     <i class="fa fa-plus" aria-hidden="true"></i>
-                </a> -->
+                </a>
                 <table class="table table-striped table-bordered" id="dataTable">
                     <thead>
                         <tr>
@@ -39,7 +39,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                    
+                        @foreach($pekerjaan as $p)
+                        <tr>
+                            <td>{{ $loop->iteration }}.</td>
+                            <td>{{$p->nama_pekerjaan}}</td>
+                            
+                            <th>
+                                <a class="btn btn-info btn-sm mb-1 mr-1 d-inline" href="{{route('pekerjaan_karyawan.edit',$p->id_pekerjaan)}}">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Ubah
+                                </a>
+                                <form action="{{route('pekerjaan_karyawan.destroy',$p->id_pekerjaan)}}" method="post" class="d-inline" id="{{'form-hapus-pekerjaan-'.$p->id_pekerjaan}}">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger btn-sm btn-hapus" data-id="{{$p->id_pekerjaan}}" data-username="{{$p->nama_pekerjaan}}"  type="submit">
+                                        <i class="fas fa-trash"></i>
+                                        Hapus
+                                    </button>
+                                    </form>
+                            </th>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -64,7 +85,7 @@
         $('.btn-hapus').on('click', function(e){
             e.preventDefault();
             let id = $(this).data('id');
-            let form = $('#form-hapus-user-'+id);
+            let form = $('#form-hapus-pekerjaan-'+id);
             let username = $(this).data('username');
 
             Swal.fire({

@@ -1,6 +1,6 @@
 @extends('layouts.default')
-@section('title','Data Pekerjaan ')
-@section('header-title','Data Pekerjaan ')
+@section('title','Data Pekerjaan Karyawan')
+@section('header-title','Data Pekerjaan Karyawan ')
 
 @section('content')
     <div class="card shadow mb-4">
@@ -26,7 +26,7 @@
                     <strong>{{ $message }}</strong>
                 </div>
                 @endif
-                <a href="{{route('pekerjaan.create')}}" class="btn btn-success mb-4">
+                <a href="{{route('perusahaan.create')}}" class="btn btn-success mb-4">
                     Tambah
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </a>
@@ -35,31 +35,34 @@
                         <tr>
                             <th>No.</th>
                             <th>Nama Pekerjaan</th>
+                            <th>Alamat Perusahaan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($pekerjaan as $p)
-                        <th>{{ $loop->iteration }}.</th>
-                        <th>{{ $p->nama_pekerjaan}}</th>
-                        <th>
-                        <div class="d-flex justify-content-center">
-                                <a class="btn btn-info " href="{{route('pekerjaan.edit',$k->id_pekerjaan)}}">
+                    @foreach($perusahaan as $p)
+                        <tr>
+                            <td>{{ $loop->iteration }}.</td>
+                            <td>{{$p->nama_perusahaan}}</td>
+                            <td>{{$p->alamat_perusahaan}}</td>
+                            
+                            <th>
+                                <a class="btn btn-info btn-sm mb-1 mr-1 d-inline" href="{{route('perusahaan.edit',$p->id_perusahaan)}}">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Ubah
                                 </a>
-                                <form action="{{route('pekerjaan.destroy',$p->id_pekerjaan)}}" method="post" class="d-inline" id="{{'form-hapus-pekerjaan-'.$k->id_pekerjaan}}">
+                                <form action="{{route('perusahaan.destroy',$p->id_perusahaan)}}" method="post" class="d-inline" id="{{'form-hapus-perusahaan-'.$p->id_perusahaan}}">
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger btn-sm btn-hapus" data-id="{{$k->id_pekerjaan}}" data-username="{{$k->nama_pekerjaan}}"  type="submit">
+                                    <button class="btn btn-danger btn-sm btn-hapus" data-id="{{$p->id_perusahaan}}" data-username="{{$p->nama_perusahaan}}"  type="submit">
                                         <i class="fas fa-trash"></i>
                                         Hapus
                                     </button>
                                     </form>
-                            </div>
-                        </th>
-                    @endforeach
+                            </th>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -84,7 +87,7 @@
         $('.btn-hapus').on('click', function(e){
             e.preventDefault();
             let id = $(this).data('id');
-            let form = $('#form-hapus-pekerjaan-'+id);
+            let form = $('#form-hapus-perusahaan-'+id);
             let username = $(this).data('username');
 
             Swal.fire({

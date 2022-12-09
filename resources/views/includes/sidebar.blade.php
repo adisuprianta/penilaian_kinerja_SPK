@@ -31,31 +31,31 @@
         Data
     </div>
 
-    
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('perusahaan.index')}}">
+        <i class="fa fa-building"></i>
+            <span><b>Perusahaan Partner</b></span>
+        </a>
+    </li>
     <li class="nav-item">
         <a class="nav-link" href="{{route('user.index')}}">
-            <i class="fas fa-minus"></i>
+        <i class="fa fa-users"></i>
             <span><b>Data User</b></span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{route('kriteria.index')}}">
-            <i class="fas fa-minus"></i>
+        <i class="fa fa-book"></i>
             <span><b>Data Kriteria</b></span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{route('karyawan.index')}}">
-            <i class="fas fa-minus"></i>
+        <i class="fa fa-users"></i>
             <span><b>Data Karyawan</b></span>
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{route('pekerjaan.index')}}">
-            <i class="fas fa-minus"></i>
-            <span><b>Pekerjaan Karyawan</b></span>
-        </a>
-    </li>
+    
     <!-- Divider -->
     <hr class="sidebar-divider">
     @endif
@@ -67,19 +67,26 @@
     </div>
     <li class="nav-item">
         <a class="nav-link" href="">
-            <i class="fas fa-plus"></i>
+            <i class="fa fa-file-signature"></i>
+            <span><b>Kontrak Karyawan</b></span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="">
+        <i class="fa fa-pen"></i>
             <span><b>Riwayat Kerja</b></span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="">
-            <i class="fas fa-minus"></i>
+            <i class="fa fa-file-signature"></i>
             <span><b>Kinerja Karyawan</b></span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="">
-            <i class="fas fa-minus"></i>
+        <!-- <i class="fa-solid fa-ranking-star"></i> -->
+        <i class="fa fa-file"></i>
             <span><b>Rangking Karyawan</b></span>
         </a>
     </li>
