@@ -17,7 +17,7 @@ use Illuminate\Validation\Rules;
 class UserController extends Controller
 {
     public function index(){
-        $user =DB::table('users as u')-> select('u.*','r.display_name' )->
+        $user =DB::table('users as u')->select('u.*','r.display_name' )->
         join('role_user as ru', 'ru.user_id' ,'=','u.id')->join('roles as r','r.id','=','ru.role_id')->get();
 
         

@@ -66,7 +66,7 @@
     Karyawan
     </div>
     <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{route('kontrak.index')}}">
             <i class="fa fa-file-signature"></i>
             <span><b>Kontrak Karyawan</b></span>
         </a>

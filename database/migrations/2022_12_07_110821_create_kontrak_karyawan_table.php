@@ -18,7 +18,7 @@ class CreateKontrakKaryawanTable extends Migration
             $table->unsignedinteger('id_karyawan');
             $table->date('tanggal_masuk');
             $table->date('tanggal_kerja');
-            $table->string('Berkas_kontrak');
+            $table->string('berkas_kontrak');
             $table->char('status',1);
             $table->foreign('id_karyawan')->references('id_karyawan')->on('karyawan')
             ->onUpdate('cascade')->onDelete('cascade');

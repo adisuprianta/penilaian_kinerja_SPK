@@ -33,12 +33,16 @@ Route::group(['middleware' => ['auth', 'role:manajer']], function() {
     // Route::get('/kriteria/show/{$id_kriteria}', function($id_kriteria){
     //     return "dsadas";
     // })->name('kriteria.show');
+    Route::resource('/kontrak','App\Http\Controllers\KontrakController');
+    Route::get('/kontrak/{id}/create','App\Http\Controllers\KontrakController@create')->name('kontrak.create');
+    Route::put('/kontrak/{id}/store','App\Http\Controllers\KontrakController@store')->name('kontrak.store');
 
     Route::resource('/pekerjaan_karyawan','App\Http\Controllers\PekerjaanController');
     Route::get('/pekerjaan_karyawan/create/{id}','App\Http\Controllers\PekerjaanController@create')->name('pekerjaan_karyawan.create');
     Route::post('/pekerjaan_karyawan/store/{id}','App\Http\Controllers\PekerjaanController@store')->name('pekerjaan_karyawan.store');
  
     Route::resource('/perusahaan','App\Http\Controllers\PerusahaanController');
+
     Route::resource('/karyawan','App\Http\Controllers\KaryawanController');
     Route::get('/karyawan/create', 'App\Http\Controllers\KaryawanController@create')->name('karyawan.create');
 

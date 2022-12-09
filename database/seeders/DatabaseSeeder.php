@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Perusahaan;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,5 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LaratrustSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(PangkatSeeder::class);
+        $this->call(PerusahaanSeeder::class);
+        $this->call(KaryawanSeeder::class);
     }
 }
