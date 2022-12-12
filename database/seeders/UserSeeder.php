@@ -31,6 +31,25 @@ class UserSeeder extends Seeder
         ]);
 
         $user->attachRole("manajer");
+        $user = User::create([
+            'name' => 'adi',
+              'email' => 'adi@gmail.com',
+              'password' => Hash::make('123'),
+              'created_at' => (new DateTime()),
+              'updated_at' => (new datetime()),
+        ]);
+
+        $user->attachRole("user");
+
+        $user = User::create([
+            'name' => 'maho',
+              'email' => 'maho@gmail.com',
+              'password' => Hash::make('123'),
+              'created_at' => (new DateTime()),
+              'updated_at' => (new datetime()),
+        ]);
+
+        $user->attachRole("team_leader");
 
     }
 }

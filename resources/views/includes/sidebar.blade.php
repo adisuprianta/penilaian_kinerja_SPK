@@ -65,24 +65,50 @@
     <div class="sidebar-heading">
     Karyawan
     </div>
+    @if (Auth::user()->hasRole('manajer') )
     <li class="nav-item">
         <a class="nav-link" href="{{route('kontrak.index')}}">
             <i class="fa fa-file-signature"></i>
             <span><b>Kontrak Karyawan</b></span>
         </a>
     </li>
-    <li class="nav-item">
+    @endif
+    <!-- <li class="nav-item">
         <a class="nav-link" href="">
         <i class="fa fa-pen"></i>
             <span><b>Riwayat Kerja</b></span>
         </a>
+    </li> -->
+    @if (Auth::user()->hasRole('user') or Auth::user()->hasRole('team_leader') )
+    <li class="nav-item">
+        <div class="btn-group">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-file-signature"></i>
+            <span><b>Pekerjaan Karyawan</b></span>
+            </a>
+            <div class="dropdown-menu">
+            @foreach($perusahaan as $p)
+                <a class="dropdown-item" href="{{route('penilaian.index',$p->id_perusahaan)}}">{{$p->nama_perusahaan }}</a>
+            @endforeach
+            </div>
+        </div>
     </li>
+    
+
     <li class="nav-item">
         <a class="nav-link" href="">
             <i class="fa fa-file-signature"></i>
             <span><b>Kinerja Karyawan</b></span>
         </a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="">
+            <i class="fa fa-file-signature"></i>
+            <span><b>Pekerjaan Karyawan</b></span>
+        </a>
+    </li>
+    @endif
     <li class="nav-item">
         <a class="nav-link" href="">
         <!-- <i class="fa-solid fa-ranking-star"></i> -->

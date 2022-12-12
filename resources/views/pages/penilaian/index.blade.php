@@ -26,7 +26,10 @@
                     <strong>{{ $message }}</strong>
                 </div>
                 @endif
-                
+                <a href="{{route('karyawan.create')}}" class="btn btn-success mb-4">
+                    Tambah
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </a>
                 <!-- <a href="" class="btn btn-success mb-4">
                     Kontrak Kerja
                     <i class="fa fa-file-signature"></i>
@@ -36,57 +39,19 @@
                         <tr>
                             <th scope="col">No.</th>
                             <th scope="col">Nama Karyawan</th>
-                            <th scope="col">Berkas Kontrak Kerja</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Tanggal Masuk</th>
-                            <th scope="col">Tanggal Kerja</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">No Hp</th>
+                            <th scope="col">Pangkat Karyawan</th>
+                            <th scope="col">Perusahaan</th>
+                            <th scope="col">Jenis Kelamin</th>
+                            <th scope="col">Alamat</th>
+                            <th scope="col">Tanggal Lahir</th>
+                            <th scope="col">Jobdesk</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($kontrak as $k)
-                        <tr>
-                            <td>{{ $loop->iteration }}.</td>
-                            <td>{{$k->nama_karyawan}}</td>
-                            <!-- value=url('/berkas_kontrak/'kontrak->berkas_kontrak) -->
-                            <th>
-                                <a href="{{url('/berkas_kontrak/'.$k->berkas_kontrak)}}" target="_blank" rel="noopener noreferrer">
-                                    {{$k->berkas_kontrak}}
-                                </a>
-                            </th>
-                            <th>{{$k->status}}</th>
-                            <th>{{$k->tanggal_masuk}}</th>
-                            <th>{{$k->tanggal_kerja}}</th>
-                            <th>
-                                <div class="d-flex justify-content-end">
-                                    
-                                    @if($k->status == null)
-                                    <a class="btn btn-info btn-sm w-100 h-100 "  href="{{route('kontrak.create',$k->id)}}">
-                                        <i class="fas fa-plus">
-                                        </i>
-                                        Kontrak Kerja
-                                    </a>   
-                                    @else
-                                      
-                                    <a class="btn btn-info btn-sm w-100 h-100 "  href="{{route('kontrak.edit',$k->id)}}">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Ubah
-                                    </a>
-                                    <form action="{{route('kontrak.destroy',$k->id_kontrak)}}" method="post" class="ml-2 d-inline" id="{{'form-hapus-kontrak-'.$k->id_kontrak}}">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button class="btn btn-danger btn-sm  btn-hapus w-100 h-100" data-id="{{$k->id_kontrak}}" data-username="{{$k->nama_karyawan}}"  type="submit">
-                                        <i class="fas fa-trash"></i> 
-                                            Hapus
-                                        </button>
-                                    </form>            
-                                    @endif
-                                </div>
-                               
-                            </th>
-                        </tr>
-                        @endforeach
+                    
                     </tbody>
                 </table>
             </div>
@@ -111,7 +76,7 @@
         $('.btn-hapus').on('click', function(e){
             e.preventDefault();
             let id = $(this).data('id');
-            let form = $('#form-hapus-kontrak-'+id);
+            let form = $('#form-hapus-user-'+id);
             let username = $(this).data('username');
 
             Swal.fire({

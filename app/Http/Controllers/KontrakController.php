@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Session;
+use File;
 
 class KontrakController extends Controller
 {
@@ -50,6 +51,43 @@ class KontrakController extends Controller
         ]);
         $berkas->move(public_path().'/berkas_kontrak',$nama_berkas);
         Session::flash('sukses','Berhasil menginputkan data');
+        return redirect(route('kontrak.index'));
+    }
+    public function edit($id){
+        $kontrak = Kontrak_kerja::find($id);
+        $karyawan=karyawan::find($kontrak->id_karyawan);
+        // dd($karyawan);
+        return view('pages.kontrak.edit',['karyawan'=>$karyawan,'kontrak'=>$kontrak]);
+    }
+    public function update($id,Request $request){
+        $messages= [
+            'required' => ':semua data wajib diisi!!!',
+            'between' => 'Nilai harus di isi dari :min - :max bukan :input!!!',
+            'min' => ':nilai harus diisi minimal :min karakter!!!',
+            'max' => ':nilai harus diisi maksimal :max karakter!!!',
+            'date'=> ':Nilai inputan harus diisi dengan tanggal',
+            
+        ];
+        $request->validate([
+            
+            'tgl_kerja'=>['required','date'],
+            'status'=> ['required'],
+            'berkas'=> ['required','mimes:pdf,docx','max:2048'],
+        ],$messages);
+
+        $kontrak=Kontrak_kerja::find($id);
+        File::delete('berkas_kontrak/'.$kontrak->berkas_kontrak);
+
+        $current = Carbon::now()->isoFormat('Y-M-D');
+        $berkas = $request->file('berkas');
+        $nama_berkas = $request->nama_karyawan."_Kontrak_Kerja_".$current.".".$berkas->getClientOriginalExtension();
+        Kontrak_kerja::where('id_kontrak',$id)->update([
+            'tanggal_kerja'=>Carbon::parse($request->tgl_kerja)->format('Y-m-d'),
+            'berkas_kontrak'=>$nama_berkas,
+            'status'=>$request->status
+        ]);
+        $berkas->move(public_path().'/berkas_kontrak',$nama_berkas);
+        Session::flash('sukses','Berhasil mengupdate data');
         return redirect(route('kontrak.index'));
     }
 }

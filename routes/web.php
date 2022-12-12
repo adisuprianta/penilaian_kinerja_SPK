@@ -23,6 +23,14 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth']], function() { 
     Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
 });
+
+Route::group(['middleware' => ['auth', 'role:user']], function() { 
+    
+    Route::resource('/penilaian','App\Http\Controllers\PenilaianController');
+    Route::get('/penilaian/index/{id}','App\Http\Controllers\PenilaianController@index')->name('penilaian.index');
+});
+
+
 Route::group(['middleware' => ['auth', 'role:manajer']], function() { 
     // Route::get('/dashboard/myprofile', 'App\Http\Controllers\DashboardController@myprofile')->name('dashboard.myprofile');
 
