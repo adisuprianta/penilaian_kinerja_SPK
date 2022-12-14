@@ -28,6 +28,8 @@ Route::group(['middleware' => ['auth', 'role:user']], function() {
     
     Route::resource('/penilaian','App\Http\Controllers\PenilaianController');
     Route::get('/penilaian/index/{id}','App\Http\Controllers\PenilaianController@index')->name('penilaian.index');
+    Route::get('/penilaian/{id}/create','App\Http\Controllers\PenilaianController@create')->name('penilaian.create');
+    Route::put('/penilaian/store/{id}','App\Http\Controllers\PenilaianController@store')->name('penilaian.store');
 });
 
 

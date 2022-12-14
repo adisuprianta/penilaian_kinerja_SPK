@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kriteria;
+use App\Models\Pangkat_karyawan;
 use Session;
 class KriteriaController extends Controller
 {
@@ -11,11 +12,12 @@ class KriteriaController extends Controller
             return view("pages.subkriteria.index");
         }
     public function index(){
-        $kriteria = Kriteria::get();
+        $kriteria = Kriteria::join('pangkat_karyawan as pk','id_pangkat','=','id_pangkat_karyawan')->get();
         return view('pages.kriteria.index',['kriteria'=>$kriteria]);
     }
     public function create(){
-        return view('pages.kriteria.create');
+        $pangkat = Pangkat_karyawan::get();
+        return view('pages.kriteria.create',["pangkat"=>$pangkat]);
     }
     public function store(Request $request){
         $messages = [
@@ -26,13 +28,17 @@ class KriteriaController extends Controller
         ];
         $request->validate([
             'kriteria' => ['required', 'string', 'max:255'],
+            'pangkat'=>['required'],
             'nilai' => ['required', 'numeric','between: 1,100' ],
+            'golongan'=>['required'],
         ],$messages);
 
         Kriteria::create([
+            'id_pangkat'=>$request->pangkat,
             'nama_kriteria' => $request->kriteria,
             'nilai_perbandingan_kriteria' =>$request->nilai,
             'bobot_kriteria'=>"0",
+            'golongan'=>$request->golongan,
         ]);
         $this->HitungBobotKriteria();
 
@@ -100,8 +106,9 @@ class KriteriaController extends Controller
         }
     }
     public function edit($id){
+        $pangkat = Pangkat_karyawan::get();
         $kriteria = Kriteria::find($id);
-        return view("pages.kriteria.edit",["id"=>$id,"kriteria"=>$kriteria]);
+        return view("pages.kriteria.edit",['pangkat'=>$pangkat,"id"=>$id,"kriteria"=>$kriteria]);
     }
     public function update($id, Request $request){
         $messages = [
@@ -112,14 +119,18 @@ class KriteriaController extends Controller
         ];
         $request->validate([
             'kriteria' => ['required', 'string', 'max:255'],
+            'pangkat'=>['required'],
             'nilai' => ['required', 'numeric','between: 1,100' ],
+            'golongan'=>['required'],
         ],$messages);
 
         Kriteria::where("id_kriteria",$id)->update([
+            'id_pangkat'=>$request->pangkat,
             'nama_kriteria' => $request->kriteria,
             'nilai_perbandingan_kriteria' =>$request->nilai,
+            'golongan'=>$request->golongan,
         ]);
-        $this->HitungBobotSubKriteria();
+        $this->HitungBobotkriteria();
 
         Session::flash('sukses','Berhasil mengupdate data');
         return redirect(route('kriteria.index'));

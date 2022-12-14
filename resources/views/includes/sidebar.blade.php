@@ -84,7 +84,7 @@
         <div class="btn-group">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-file-signature"></i>
-            <span><b>Pekerjaan Karyawan</b></span>
+            <span><b>Kinerja Karyawan</b></span>
             </a>
             <div class="dropdown-menu">
             @foreach($perusahaan as $p)
@@ -94,14 +94,14 @@
         </div>
     </li>
     
-
+    @if (Auth::user()->hasRole('manajer')  )
     <li class="nav-item">
         <a class="nav-link" href="">
             <i class="fa fa-file-signature"></i>
-            <span><b>Kinerja Karyawan</b></span>
+            <span><b>Kinerja Team Leader</b></span>
         </a>
     </li>
-
+    @endif
     <li class="nav-item">
         <a class="nav-link" href="">
             <i class="fa fa-file-signature"></i>

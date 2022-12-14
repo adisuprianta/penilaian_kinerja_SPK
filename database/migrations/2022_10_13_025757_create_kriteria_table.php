@@ -15,10 +15,14 @@ class CreateKriteriaTable extends Migration
     {
         Schema::create('kriteria_ahp', function (Blueprint $table) {
             $table->increments('id_kriteria');
+            $table->unsignedInteger('id_pangkat');
             $table->string('nama_kriteria',20);
             $table->decimal('bobot_kriteria', 18,4);
             $table->integer('nilai_perbandingan_kriteria');
+            $table->char('golongan',1);
             $table->timestamps();
+            $table->foreign('id_pangkat')->references('id_pangkat_karyawan')->on('pangkat_karyawan')->onUpdate('cascade')->onDelete('restrict');
+            
         });
     }
 

@@ -30,7 +30,26 @@
                 </div>
                 @enderror
             </div>
-            
+            <div class="form-group">
+                <label for="exampleFormControlSelect2">Golongan Kriteria</label>
+                <select class="form-control @error('golongan') is-invalid @enderror" name="golongan" id="golongan" >
+                    @if($subkriteria->golongan =="B")
+                    <!-- <option selected></option> -->
+                    <option selected value="B">Benefit</option>
+                    <option value="C">Cost</option>
+                    @else
+                    <!-- <option selected></option> -->
+                    <option value="B">Benefit</option>
+                    <option selected value="C">Cost</option>
+
+                    @endif
+                </select>
+                @error('golongan')
+                <div class="text-danger">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
             <div class="form-group">
                 <label for="Nilai Bobot">Nilai Perbandingan Sub Kriteria</label>
                 <input name="nilai" rows="3" id="nilai" class="form-control @error('perincian') is-invalid @enderror" value="{{$subkriteria->nilai_perbandingan_sub_kriteria}}"></input>

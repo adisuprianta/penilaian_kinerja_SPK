@@ -35,6 +35,9 @@
                         <tr>
                             <th>No.</th>
                             <th>Nama Kriteria</th>
+                            <th>Golongan</th>
+                            <th>Tipe Kriteria</th>
+                            
                             <th>Bobot</th>
                             <th>Nilai Kriteria</th>
                             <th>Sub kriteria</th>
@@ -46,6 +49,14 @@
                         <tr>
                             <td>{{ $loop->iteration }}.</td>
                             <td>{{$k->nama_kriteria}}</td>
+                            <td>{{$k->nama_pangkat}}</td>
+                            <td>
+                                @if($k->golongan == "B")
+                                    Benefit
+                                @else
+                                    Cost
+                                @endif
+                            </td>
                             <th>{{$k->bobot_kriteria}}</th>
                             <th>{{$k->nilai_perbandingan_kriteria}}</th>
                             <th>

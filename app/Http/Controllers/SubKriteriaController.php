@@ -29,6 +29,7 @@ class SubKriteriaController extends Controller
         $request->validate([
             'kriteria' => ['required', 'string', 'max:255'],
             'nilai' => ['required', 'numeric','between: 1,100' ],
+            'golongan'=>['required'],
         ],$messages);
 
         SubKriteria::create([
@@ -36,6 +37,7 @@ class SubKriteriaController extends Controller
             'nama_sub_kriteria' => $request->kriteria,
             'nilai_perbandingan_sub_kriteria' =>$request->nilai,
             'bobot_sub_kriteria'=>"0",
+            'golongan'=>$request->golongan,
         ]);
         $this->HitungBobotSubKriteria($id);
 
@@ -117,11 +119,13 @@ class SubKriteriaController extends Controller
         $request->validate([
             'kriteria' => ['required', 'string', 'max:255'],
             'nilai' => ['required', 'numeric','between: 1,100' ],
+            'golongan'=>['required'],
         ],$messages);
 
         SubKriteria::where("id_sub_kriteria",$id)->update([
             'nama_sub_kriteria' => $request->kriteria,
             'nilai_perbandingan_sub_kriteria' =>$request->nilai,
+            'golongan'=>$request->golongan,
         ]);
         $id_kriteria=SubKriteria::find($id);
         $this->HitungBobotSubKriteria($id_kriteria->id_kriteria);
