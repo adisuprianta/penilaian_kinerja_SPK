@@ -60,7 +60,25 @@
                             <th>Perempuan</th>
                             @endif
                             <th>
-                                @if(count($nilai_kriteria) == 0 AND count($nilai_sub_kriteria) == 0)
+                                @php
+                                $cek=0;
+                                $c=0;
+                                @endphp
+                                @foreach($nilai_sub_kriteria as $nk)
+                                    @if($nk->id_karyawan == $k->id_karyawan)
+                                        @php
+                                           $cek=1;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @foreach($nilai_kriteria as $nk)
+                                    @if($nk->id_karyawan == $k->id_karyawan)
+                                        @php
+                                            $c=1;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @if($c == 0 AND $cek == 0)
                                 <a class="btn btn-info btn-sm w-100 h-100" href="{{route('penilaian.create',$k->id_karyawan)}}">
                                    <span>Nilai</span>
                                 </a>
@@ -77,12 +95,14 @@
             </div>
         </div>
         <div class="card-footer">
-            <form class="form float-right" action="#" method="post" >
+            <form class="form float-right" action="{{route('penilaian.hitung',$id_perusahaan)}}" method="post" >
+            @method('PUT')
+            @csrf
                 <!-- <input type="hidden" name="_token" value="mKJUfJZxLMNd27JVQGhwnzBV9tyKlCDeuehI8xSf"> -->
                 <!-- <input type="hidden" value="2022-11-13" name="tgl_awal"> -->
                 <input type="hidden" value="{{$tanggal}}" name="tgl">
                 <!-- <input type="hidden" value="bg0" name="id_bagian"> -->
-                <button type="submit" class="btn btn-info btn-hitung mb-2">Simpan</button>
+                <button type="submit" class="btn btn-info btn-hitung mb-2">Hitung</button>
             </form>
          </div>
     </div>

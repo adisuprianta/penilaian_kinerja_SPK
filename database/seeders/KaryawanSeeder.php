@@ -29,5 +29,18 @@ class KaryawanSeeder extends Seeder
             'updated_at' => (new DateTime()),
 
         ]);
+        DB::table('karyawan')->insert([
+            'nama_karyawan' => "adii",
+            'id_pangkat'=>"2",
+            'email' => 'adi@gmai.com',
+            'no_hp' => '081936124448',
+            'jenis_kelamin'=> 'L',
+            'id_perusahaan'=>'1',
+            'alamat'=>'surabaya',
+            'tanggal_lahir'=> '2001-01-01',
+            'created_at' => (new DateTime()),
+            'updated_at' => (new DateTime()),
+
+        ]);
     }
 }

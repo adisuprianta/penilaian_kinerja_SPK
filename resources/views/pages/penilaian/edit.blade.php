@@ -16,7 +16,7 @@
             @method('PUT')
             @csrf
             @foreach($kriteria as $k)
-                <h5 class="h5 mb-4 text-gray-800">{{$k->nama_kriteria}}</h5>
+                <h4 class="h3 mb-4 text-gray-800">{{$k->nama_kriteria}}</h4>
                 @php
                 $no=0
                 @endphp
@@ -35,14 +35,14 @@
                                 </div>
                             @endif
                         @endforeach
-                    @else
-                    @php
-                        $no=$k->id_kriteria
-                    @endphp
+                        @php
+                            $no=$k->id_kriteria
+                        @endphp
                     @endif
                 
                 @endforeach
                 @if($k->id_kriteria == $no)
+                @else
                     @foreach($nilai_kriteria as $nk)
                         @if($nk->id_kriteria == $k->id_kriteria)        
                             <div class="form-group">

@@ -16,7 +16,7 @@
             @method('PUT')
             @csrf
             @foreach($kriteria as $k)
-                <h5 class="h5 mb-4 text-gray-800">{{$k->nama_kriteria}}</h5>
+                <h4 class="h4 mb-4 text-gray-800">{{$k->nama_kriteria}}</h4>
                 @php
                 $no=0
                 @endphp
@@ -31,15 +31,15 @@
                         </div>
                         @enderror
                     </div>
-                    @else
                     @php
                         $no=$k->id_kriteria
                     @endphp
-                    @endif
-                
+                @endif
                 @endforeach
                 @if($k->id_kriteria == $no)
-                    <div class="form-group">
+                    
+                @else
+                <div class="form-group">
                         <label for="jumlah">{{$k->nama_kriteria}}</label>
                         <input type="number" name="nama{{$k->id_kriteria}}" class="form-control @error('nama{{$k->id_kriteria}}') is-invalid @enderror" min="0" max="100" value="0">
                         @error('nama{{$k->id_kriteria}}')
