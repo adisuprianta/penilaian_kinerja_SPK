@@ -83,9 +83,16 @@
                                    <span>Nilai</span>
                                 </a>
                                 @else
-                                <a class="btn btn-info btn-sm w-100 h-100" href="{{route('penilaian.edit',$k->id_karyawan)}}">
-                                   <span>Edit</span>
-                                </a>
+                                <form action="{{route('penilaian.edit',$k->id_karyawan)}}" method="post" class=" d-inline" id="{{'form-hapus-karyawan-'.$k->id_karyawan}}">
+                                <input type="hidden" value="{{$tanggal}}" name="tgl_bobot">
+                                    @csrf
+
+                                    <button class="btn btn-info btn-sm w-100 h-100"  type="submit">
+                                    
+                                        Edit
+                                    </button>
+                                    </form>
+                                
                                 @endif
                             </th>
                         </tr>

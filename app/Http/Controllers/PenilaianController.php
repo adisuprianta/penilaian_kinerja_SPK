@@ -10,6 +10,7 @@ use App\Models\Kriteria;
 use App\Models\nilai_kriteria;
 use App\Models\nilai_sub_kriteria;
 use App\Models\Perusahaan;
+use App\Models\role_user_perusahaan;
 use App\Models\SubKriteria;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,14 +19,16 @@ use Illuminate\Support\Facades\DB;
 
 class PenilaianController extends Controller
 {
-    public function index($id){
+    public function index(){
+        $perusahaan = role_user_perusahaan::find(Auth::user()->id);
+        // dd($perusahaan);
         if(Auth::user()->hasRole('manajer')  ){
             $karyawan = DB::table('karyawan as k')
             ->select('pk.nama_pangkat','pp.nama_perusahaan','k.id_karyawan','k.nama_karyawan','k.jenis_kelamin')
             ->join('kontrak_karyawan as kk','k.id_karyawan','=','kk.id_karyawan')->
             join('pangkat_karyawan as pk','k.id_pangkat','=','pk.id_pangkat_karyawan')->
             join('perusahaan_partner as pp', 'k.id_perusahaan','=','pp.id_perusahaan')
-            ->where('kk.status','A')->where('pp.id_perusahaan',$id)
+            ->where('kk.status','A')->where('pp.id_perusahaan',$perusahaan->id_perusahaan)
             ->where('k.id_pangkat','1')
             ->get();
             // ->groupBy('k.id_pangkat','k.id_karyawan','k.id_perusahaan','k.nama_karyawan','k.email','k.no_hp','k.jenis_kelamin','k.alamat','k.tanggal_lahir','k.created_at','k.updated_at')
@@ -38,7 +41,7 @@ class PenilaianController extends Controller
             ->where('tanggal_nilai',Carbon::now()->format('Y-m-d'))->get();
             // dd($karyawan);
             // dd($nilai_kriteria);
-            $perusahaan = Perusahaan::get();
+            // $perusahaan = Perusahaan::get();
         }elseif(Auth::user()->hasRole('user')){
             $karyawan = DB::table('karyawan as k')
             ->select('pk.nama_pangkat','pp.nama_perusahaan','k.id_karyawan','k.nama_karyawan','k.jenis_kelamin')
@@ -46,7 +49,7 @@ class PenilaianController extends Controller
             join('pangkat_karyawan as pk','k.id_pangkat','=','pk.id_pangkat_karyawan')->
             join('perusahaan_partner as pp', 'k.id_perusahaan','=','pp.id_perusahaan')
             
-            ->where('kk.status','A')->where('pp.id_perusahaan',$id)
+            ->where('kk.status','A')->where('pp.id_perusahaan',$perusahaan->id_perusahaan)
             
         
             ->get();
@@ -60,7 +63,7 @@ class PenilaianController extends Controller
             ->where('tanggal_nilai',Carbon::now()->format('Y-m-d'))->get();
             // dd($karyawan);
             // dd($nilai_kriteria);
-            $perusahaan = Perusahaan::get();
+            // $perusahaan = Perusahaan::get();
         }elseif(Auth::user()->hasRole('team_leader')){
             $karyawan = DB::table('karyawan as k')
             ->select('pk.nama_pangkat','pp.nama_perusahaan','k.id_karyawan','k.nama_karyawan','k.jenis_kelamin')
@@ -68,7 +71,7 @@ class PenilaianController extends Controller
             join('pangkat_karyawan as pk','k.id_pangkat','=','pk.id_pangkat_karyawan')->
             join('perusahaan_partner as pp', 'k.id_perusahaan','=','pp.id_perusahaan')
             ->where('k.id_pangkat','2')
-            ->where('kk.status','A')->where('pp.id_perusahaan',$id)        
+            ->where('kk.status','A')->where('pp.id_perusahaan',$perusahaan->id_perusahaan)        
             ->get();
             // ->groupBy('k.id_pangkat','k.id_karyawan','k.id_perusahaan','k.nama_karyawan','k.email','k.no_hp','k.jenis_kelamin','k.alamat','k.tanggal_lahir','k.created_at','k.updated_at')
             // ->leftJoin('nilai_sub_kriteria as ns','k.id_karyawan','=','ns.id_karyawan')
@@ -80,11 +83,11 @@ class PenilaianController extends Controller
             ->where('tanggal_nilai',Carbon::now()->format('Y-m-d'))->get();
             // dd($karyawan);
             // dd($nilai_kriteria);
-            $perusahaan = Perusahaan::get();
+            
         }
         
         
-        return view('pages.penilaian.index',['id_perusahaan'=>$id,'nilai_kriteria'=>$nilai_kriteria,'nilai_sub_kriteria'=>$nilai_sub_kriteria,'perusahaan'=>$perusahaan,'karyawan'=>$karyawan,'tanggal'=>$tanggal]);
+        return view('pages.penilaian.index',['id_perusahaan'=>$perusahaan->id_perusahaan,'nilai_kriteria'=>$nilai_kriteria,'nilai_sub_kriteria'=>$nilai_sub_kriteria,'perusahaan'=>$perusahaan,'karyawan'=>$karyawan,'tanggal'=>$tanggal]);
     }
     public function create($id){
         $karyawan = karyawan::find($id);
@@ -93,10 +96,10 @@ class PenilaianController extends Controller
         }else{
             $kriteria = Kriteria::get();
         }
-        
+        // dd($karyawan);
         $subkriteria = SubKriteria::get();
-        $perusahaan = Perusahaan::get();
-        return view('pages.penilaian.create',['id'=>$id,'perusahaan'=>$perusahaan,'subkriteria'=>$subkriteria,'kriteria'=>$kriteria]);
+        $perusahaan = role_user_perusahaan::find(Auth::user()->id);
+        return view('pages.penilaian.create',['karyawan'=>$karyawan,'id'=>$id,'perusahaan'=>$perusahaan,'subkriteria'=>$subkriteria,'kriteria'=>$kriteria]);
     }
     public function store(Request $request,$id){
         $messages= [
@@ -192,7 +195,8 @@ class PenilaianController extends Controller
         
         return redirect(route('penilaian.index',$karyawan->id_perusahaan));
     }
-    public function edit($id){
+    public function edit($id,Request $request){
+        // dd($request->tgl_bobot);
         $karyawan = karyawan::find($id);
         if($karyawan->id_pangkat==2){
             $kriteria = Kriteria::where('id_pangkat',$karyawan->id_pangkat)->get();
@@ -202,10 +206,13 @@ class PenilaianController extends Controller
         
         $subkriteria = SubKriteria::get();
         $perusahaan = Perusahaan::get();
-        $nilai_kriteria = nilai_kriteria::where('id_karyawan',$id)->where('id_user',Auth::user()->id)->get();
-        $nilai_sub_kriteria=nilai_sub_kriteria::where('id_karyawan',$id)->where('id_user',Auth::user()->id)->get();
+        $nilai_kriteria = nilai_kriteria::where('id_karyawan',$id)->where('id_user',Auth::user()->id)
+        ->where('tanggal_nilai',$request->tgl_bobot)->get();
+        $nilai_sub_kriteria=nilai_sub_kriteria::where('id_karyawan',$id)
+        ->where('tanggal_nilai',$request->tgl_bobot)
+        ->where('id_user',Auth::user()->id)->get();
         
-        return view('pages.penilaian.edit',['nilai_kriteria'=>$nilai_kriteria,'nilai_sub_kriteria'=>$nilai_sub_kriteria,'id'=>$id,'perusahaan'=>$perusahaan,'subkriteria'=>$subkriteria,'kriteria'=>$kriteria]);
+        return view('pages.penilaian.edit',['karyawan'=>$karyawan,'nilai_kriteria'=>$nilai_kriteria,'nilai_sub_kriteria'=>$nilai_sub_kriteria,'id'=>$id,'perusahaan'=>$perusahaan,'subkriteria'=>$subkriteria,'kriteria'=>$kriteria]);
     }
     public function update($id,Request $request){
         

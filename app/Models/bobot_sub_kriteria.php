@@ -10,4 +10,7 @@ class bobot_sub_kriteria extends Model
     protected $table = 'bobot_sub_kriteria';
     protected $primaryKey= "id_bobot_sub_kriteria";
     public $guarded = [];
+    public function nilai_sub_kriteria(){
+        return $this->belongsTo('App\nilai_sub_kriteria');
+    }
 }

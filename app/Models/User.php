@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laratrust\Traits\LaratrustUserTrait;
+// use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -24,7 +25,10 @@ class User extends Authenticatable
         'email',
         'password',
     ];
-
+    
+// public function perusahaan(){
+//     return $this->hasOne('App\role_user_perusahaan');;
+// }
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -81,18 +81,12 @@
     </li> -->
     @if (Auth::user()->hasRole('user') or Auth::user()->hasRole('team_leader') )
     <li class="nav-item">
-        <div class="btn-group">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link" href="{{route('penilaian.index',$perusahaan->id_perusahaan)}}">
             <i class="fa fa-file-signature"></i>
             <span><b>Kinerja Karyawan</b></span>
-            </a>
-            <div class="dropdown-menu">
-            @foreach($perusahaan as $p)
-                <a class="dropdown-item" href="{{route('penilaian.index',$p->id_perusahaan)}}">{{$p->nama_perusahaan }}</a>
-            @endforeach
-            </div>
-        </div>
+        </a>
     </li>
+    
     
     @if (Auth::user()->hasRole('manajer')  )
     <li class="nav-item">

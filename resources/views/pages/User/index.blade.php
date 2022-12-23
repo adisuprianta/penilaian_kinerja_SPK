@@ -17,6 +17,7 @@
                             <th>Nama User</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Nama Perusahaan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -28,8 +29,9 @@
                                 <td>{{$u ->name}}</td>
                                 <td>{{$u->email}}</td>
                                 <td>{{$u->display_name}}</td>
+                                <td>{{$u->nama_perusahaan}}</td>
                                 <td>
-                                    <a class="btn btn-info btn-sm mb-1 mr-1 d-inline" href="">
+                                    <a class="btn btn-info btn-sm mb-1 mr-1 d-inline" href="{{route('user.edit',$u->id)}}">
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Ubah

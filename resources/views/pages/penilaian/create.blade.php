@@ -1,6 +1,6 @@
 @extends('layouts.default')
-@section('title','Tambah Pengeluaran')
-@section('header-title','Penilaian')
+@section('title','Penilaian '.$karyawan->nama_karyawan)
+@section('header-title','Penilaian '.$karyawan->nama_karyawan)
 
 @section('content')
 <div class="card shadow mb-4 col-lg-6">
@@ -31,10 +31,10 @@
                         </div>
                         @enderror
                     </div>
-                    @php
-                        $no=$k->id_kriteria
-                    @endphp
-                @endif
+                        @php
+                            $no=$k->id_kriteria
+                        @endphp
+                    @endif
                 @endforeach
                 @if($k->id_kriteria == $no)
                     

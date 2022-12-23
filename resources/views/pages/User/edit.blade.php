@@ -1,31 +1,33 @@
 @extends('layouts.default')
-@section('title','Tambah User')
-@section('header-title','Tambah User')
+@section('title','Edit User')
+@section('header-title','Edit User '.$nama->name)
 
 @section('content')
 
+
 <x-guest-layout>
     <x-auth-card>
-        
-
+ 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('user.store') }}">
+        <form method="POST" action="{{ route('user.update',$nama->id) }}">
+            @method('PUT')
             @csrf
-
+            @foreach($user as $u)
             <!-- Name -->
+            
             <div>
                 <x-label for="name" :value="__('Name')" />
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <x-input id="name"  class="block mt-1 w-full" type="text" name="name" value="{{$u->name}}"  required autofocus />
             </div>
 
             <!-- Email Address -->
             <div class="mt-4">
                 <x-label for="email" :value="__('Email')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="{{$u->email}}" required />
             </div>
             
              <!-- Role -->
@@ -33,9 +35,14 @@
                 <x-label for="Role" :value="__('Role')" />
 
                 <select id="role" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full"  type="role" name="role"  required>
-                    <option value="manajer">Manajer</option>
-                    <option value="team_leader">Team Leader</option>
-                    <option value="user">User</option>
+                    @foreach($role as $r)
+                    @if($u->id == $r->id)
+                        <option value="{{$r->id}}" selected >{{$r->display_name}}</option>
+                    @else
+                    <option value="{{$r->id}}"  >{{$r->display_name}}</option>
+                    @endif
+                    @endforeach
+                    
                 </select>
                 
             </div>
@@ -43,9 +50,13 @@
                 <x-label for="perusahaan" :value="__('Perusahaan')" />
 
                 <select id="perusahaan" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full"  type="role" name="perusahaan"  required>
-                    <option value="null">-</option>
+                <option value="null" selected>-</option>
                     @foreach($perusahaan as $p)
-                    <option value="{{$p->id_perusahaan}}">{{$p->nama_perusahaan}}</option>
+                        @if($p->id_perusahaan == $u->id_perusahaan)
+                        <option value="{{$p->id_perusahaan}}" selected>{{$p->nama_perusahaan}}</option>                       
+                        @else
+                        <option value="{{$p->id_perusahaan}}">{{$p->nama_perusahaan}}</option>
+                        @endif
                     @endforeach
                     
                 </select>
@@ -53,31 +64,16 @@
             </div>
 
             <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-            </div>
+            
 
             <div class="flex items-center justify-end mt-4">
                 
 
                 <x-button class="ml-4">
-                    {{ __('Register') }}
+                    {{ __('update') }}
                 </x-button>
             </div>
+            @endforeach
         </form>
     </x-auth-card>
 </x-guest-layout>
