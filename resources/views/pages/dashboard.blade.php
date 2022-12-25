@@ -1,8 +1,98 @@
 @extends('layouts.default')
 @section('title','Beranda')
-@section('header-title','Beranda')
 
 @section('content')
+
+<div class="container mb-4">
+        <div class="row">
+            <div class="col-md-12">
+                
+            </div>
+        </div>
+        <!-- home -->
+		<div class="row home">
+            <div class="col-md-10 offset-1 content-home">
+                <div class="row">
+                    <div class="col-md-5">
+                        <p>
+                            Aplikasi penilain kinerja karyawan 
+                            ini digunakan untuk menentukan karyawan terbaik melalui 
+                            ranking karyawan yang dapat 
+dilihat setelah melakukan perhitungan metode Analytical Hierarchy Process (AHP) dan metode Simple Additive Weighting (SAW).
+                        </p>
+                    </div>
+                    <div class="col-md-6 image">
+                        <img src="{{asset('img/home-logo.png')}}" alt="" height="240">
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- grafik -->
+        <h3 class="judul-grafik">GRAFIK INFORMASI CALON KARYAWAN</h3>
+        <div class="row grafik">
+        <div class="col-md-10 offset-1">
+            <div class="row">
+                <div class="col-sm-8 col-lg-4">
+                    <div class="card text-white bg-flat-color-1">
+                        <div class="card-body pb-0">
+                            <h4 class="mb-0 text-light">
+                            Jumlah Karyawan
+                            </h4>
+                            <h5 class="text-light">{{$jumlah}} Orang</h5>
+
+                        </div>
+                        <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                            <canvas id="widgetChart3"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-lg-4">
+                    <div class="card text-white bg-flat-color-3">
+                        <div class="card-body pb-0">
+                            <h4 class="mb-0 text-light">
+                                Karyawan Terbaik
+                            </h4>
+                            <p class="text-light"></p>
+
+                            <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                                <canvas id="widgetChart1"></canvas>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <!--/.col-->
+
+                <div class="col-sm-8 col-lg-4">
+                    <div class="card text-white bg-flat-color-2">
+                        <div class="card-body pb-0">
+                            <h4 class="mb-0 text-light">
+                                Karyawan Terendah
+                            </h4>
+                            <p class="text-light"></p>
+                            <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                                <canvas id="widgetChart2"></canvas>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--/.col-->
+
+                
+            </div>
+        </div>
+        
+            
+            <!--/.col-->
+
+            
+        </div>
+    </div>
+
+
 <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">

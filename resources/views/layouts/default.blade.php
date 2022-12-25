@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    
+    <link href="{{asset('css/style.css')}}" rel="stylesheet"  rel="stylesheet" type="text/css">
 <!-- Fonts -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 

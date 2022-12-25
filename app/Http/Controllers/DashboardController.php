@@ -36,6 +36,7 @@ class DashboardController extends Controller
         $karyawan = DB::table('karyawan as k')
         ->leftJoin('bobot_akhir as b','b.id_karyawan','=','k.id_karyawan')
         ->where('id_perusahaan',$perusahaan->id_perusahaan)
+        ->where('tanggal_bobot',Carbon::now()->format('Y-m-d'),)
         ->orderBy('bobot_akhir','desc')
         ->get();
         // dd($karyawan);
