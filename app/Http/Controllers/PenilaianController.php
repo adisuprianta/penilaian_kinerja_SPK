@@ -311,10 +311,7 @@ class PenilaianController extends Controller
     public function hitung($id_perusahaan,Request $request){
         // dd($id);
         
-        if(Auth::user()->hasRole('manajer')  ){
-            $kriteria = Kriteria::get();
-            $this->bantuteam_leader($kriteria,$request->tgl,$id_perusahaan);
-        }elseif(Auth::user()->hasRole('user')  ){
+        if(Auth::user()->hasRole('user')  ){
             // $con= new PenilaianController();
             $kriteria = Kriteria::where('id_pangkat','2')->get();
             $this->bantu($kriteria,$request->tgl,$id_perusahaan);
