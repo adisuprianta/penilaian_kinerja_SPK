@@ -26,7 +26,8 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::group(['middleware' => ['auth']], function() { 
     Route::resource('/penilaian','App\Http\Controllers\PenilaianController');
-    Route::get('/penilaian/index/{id}','App\Http\Controllers\PenilaianController@index')->name('penilaian.index');
+    Route::post('/penilaian/edit/{id}','App\Http\Controllers\PenilaianController@edit')->name('penilaian.edit');
+    // Route::get('/penilaian/index/{id}','App\Http\Controllers\PenilaianController@index')->name('penilaian.index');
     Route::get('/penilaian/{id}/create','App\Http\Controllers\PenilaianController@create')->name('penilaian.create');
     Route::put('/penilaian/store/{id}','App\Http\Controllers\PenilaianController@store')->name('penilaian.store');
     Route::put('/penilaian/hitung/{id}','App\Http\Controllers\PenilaianController@hitung')->name('penilaian.hitung');

@@ -38,7 +38,7 @@ class KontrakController extends Controller
             'status'=> ['required'],
             'berkas'=> ['required','mimes:pdf,docx','max:2048'],
         ],$messages);
-        // dd(1);
+        // dd($request->nama_karyawan);
         $current = Carbon::now()->isoFormat('Y-M-D');
         $berkas = $request->file('berkas');
         $nama_berkas = $request->nama_karyawan."_Kontrak_Kerja_".$current.".".$berkas->getClientOriginalExtension();

@@ -17,7 +17,7 @@
             @csrf
             <div class="form-group">
                 <label for="jumlah">Nama Karyawan</label>
-                <input type="text" name="nama_karyawan" disabled class="form-control @error('nama_karyawan') is-invalid @enderror" value="{{$karyawan->nama_karyawan}}">
+                <input type="text" name="nama_karyawan" readonly class="form-control @error('nama_karyawan') is-invalid @enderror" value="{{$karyawan->nama_karyawan}}">
                 @error('nama_karyawan')
                 <div class="text-danger">
                     {{ $message }}

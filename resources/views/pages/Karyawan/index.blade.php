@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('title','Data user')
-@section('header-title','Data user')
+@section('header-title','Data Karyawan')
 
 @section('content')
     <div class="card shadow mb-4">

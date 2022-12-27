@@ -40,14 +40,15 @@ class KriteriaController extends Controller
             'bobot_kriteria'=>"0",
             'golongan'=>$request->golongan,
         ]);
-        $this->HitungBobotKriteria();
+        $kriteria = Kriteria::get();
+        $this->HitungBobotKriteria($kriteria);
 
         Session::flash('sukses','Berhasil menginputkan data');
         return redirect(route('kriteria.index'));
     }
 
-    public function HitungBobotKriteria(){
-        $kriteria = Kriteria::get();
+    public function HitungBobotKriteria($kriteria){
+        
         $row = 0; 
         $con = 0;
         
@@ -61,7 +62,7 @@ class KriteriaController extends Controller
             }
             $row++;
         }
-
+        // dd($matriks);
         // hitung jumlah
         $jumlah=array();
         for($i=0;$i<count($matriks[0]);$i++){
@@ -97,6 +98,7 @@ class KriteriaController extends Controller
         for($i=0;$i<count($jumlah);$i++){
             $bobot[$i]=$jm[$i]/count($jm);
         }
+        // dd($bobot);
         $row=0;
         foreach($kriteria as $k){
             Kriteria::where('id_kriteria',$k->id_kriteria)->update([
@@ -104,6 +106,7 @@ class KriteriaController extends Controller
             ]);
             $row++;
         }
+        return $bobot;
     }
     public function edit($id){
         $pangkat = Pangkat_karyawan::get();
@@ -130,7 +133,8 @@ class KriteriaController extends Controller
             'nilai_perbandingan_kriteria' =>$request->nilai,
             'golongan'=>$request->golongan,
         ]);
-        $this->HitungBobotkriteria();
+        $kriteria = Kriteria::get();
+        $this->HitungBobotkriteria($kriteria);
 
         Session::flash('sukses','Berhasil mengupdate data');
         return redirect(route('kriteria.index'));

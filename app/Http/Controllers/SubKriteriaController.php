@@ -39,14 +39,15 @@ class SubKriteriaController extends Controller
             'bobot_sub_kriteria'=>"0",
             'golongan'=>$request->golongan,
         ]);
-        $this->HitungBobotSubKriteria($id);
+        $kriteria = SubKriteria::where("id_kriteria",$id)->get();
+        $this->HitungBobotSubKriteria($kriteria);
 
         Session::flash('sukses','Berhasil menginputkan data');
         return redirect(route('sub_kriteria.show',$id));
         // return $request->kriteria;
     }
-    public function HitungBobotSubKriteria($id){
-        $kriteria = SubKriteria::where("id_kriteria",$id)->get();
+    public function HitungBobotSubKriteria($kriteria){
+        
         $row = 0; 
         $con = 0;
         
@@ -128,7 +129,8 @@ class SubKriteriaController extends Controller
             'golongan'=>$request->golongan,
         ]);
         $id_kriteria=SubKriteria::find($id);
-        $this->HitungBobotSubKriteria($id_kriteria->id_kriteria);
+        $kriteria = SubKriteria::where("id_kriteria",$id_kriteria->id_kriteria)->get();
+        $this->HitungBobotSubKriteria($kriteria);
 
         Session::flash('sukses','Berhasil mengupdate data');
         return redirect(route('sub_kriteria.show',$id_kriteria->id_kriteria));

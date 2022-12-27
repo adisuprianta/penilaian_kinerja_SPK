@@ -53,8 +53,16 @@ dilihat setelah melakukan perhitungan metode Analytical Hierarchy Process (AHP) 
                             <h4 class="mb-0 text-light">
                                 Karyawan Terbaik
                             </h4>
-                            <p class="text-light"></p>
-
+                            <p class="text-light">
+                                @if($terbaik != null)
+                                    {{$terbaik->nama_karyawan}}
+                                @endif
+                            </p>
+                            <p> 
+                                @if($terbaik != null)
+                                    Nilai : {{number_format($terbaik->bobot_akhir,2)}}
+                                @endif
+                            </p>
                             <div class="chart-wrapper px-0" style="height:70px;" height="70">
                                 <canvas id="widgetChart1"></canvas>
                             </div>
@@ -106,6 +114,7 @@ dilihat setelah melakukan perhitungan metode Analytical Hierarchy Process (AHP) 
                         <tr>
                             <th rowspan="2" class="align-middle text-center text-capitalize">No.</th>
                             <th rowspan="2" class="align-middle text-center text-capitalize">nama karyawan</th>
+                            <th rowspan="2" class="align-middle text-center text-capitalize">Pangkat</th>
                             @foreach($kriteria as $k)
                                 @php
                                     $coll = 0;
@@ -125,7 +134,7 @@ dilihat setelah melakukan perhitungan metode Analytical Hierarchy Process (AHP) 
                                     <th rowspan="2" class="align-middle text-center text-capitalize">{{$k->nama_kriteria}}</th>
                                 @endif
                             @endforeach
-                            <th rowspan="2" class="align-middle text-center text-capitalize">Bobot Akhir</th>
+                            <th rowspan="2" class="align-middle text-center text-capitalize">Nilai Akhir</th>
                         </tr>
                         <tr>
                             @foreach($kriteria as $k)
@@ -142,6 +151,13 @@ dilihat setelah melakukan perhitungan metode Analytical Hierarchy Process (AHP) 
                         <tr>
                             <th  class="align-middle text-center text-capitalize">{{ $loop->iteration }}.</th>
                             <th  class="align-middle text-center text-capitalize">{{$k->nama_karyawan}}</th>
+                            <th  class="align-middle text-center text-capitalize">
+                                @if($k->id_pangkat==1)
+                                Team Leader
+                                @else
+                                Karyawan
+                                @endif
+                            </th>
                             @foreach($kriteria as $kr)
                                 @php
                                     $coll = 0;
@@ -187,7 +203,7 @@ dilihat setelah melakukan perhitungan metode Analytical Hierarchy Process (AHP) 
                                     @endif
                                 @endif
                             @endforeach
-                            <th  class="align-middle text-center text-capitalize">{{$k->bobot_akhir}}</th>
+                            <th  class="align-middle text-center text-capitalize">{{number_format($k->bobot_akhir,2)}}</th>
                         </tr>
                         
                     @endforeach

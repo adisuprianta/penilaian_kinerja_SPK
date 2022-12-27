@@ -81,35 +81,34 @@
     </li> -->
     @if (Auth::user()->hasRole('user') or Auth::user()->hasRole('team_leader') )
     <li class="nav-item">
-        <a class="nav-link" href="{{route('penilaian.index',$perusahaan->id_perusahaan)}}">
+        <a class="nav-link" href="{{route('penilaian.index')}}">
             <i class="fa fa-file-signature"></i>
             <span><b>Kinerja Karyawan</b></span>
         </a>
     </li>
-    
-    
-    @if (Auth::user()->hasRole('manajer')  )
-    <li class="nav-item">
-        <a class="nav-link" href="">
-            <i class="fa fa-file-signature"></i>
-            <span><b>Kinerja Team Leader</b></span>
-        </a>
-    </li>
-    @endif
+<!--     
     <li class="nav-item">
         <a class="nav-link" href="">
             <i class="fa fa-file-signature"></i>
             <span><b>Pekerjaan Karyawan</b></span>
         </a>
+    </li> -->
+    @endif
+    @if (Auth::user()->hasRole('manajer') )
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('penilaian.index')}}">
+            <i class="fa fa-file-signature"></i>
+            <span><b>Kinerja Team Leader</b></span>
+        </a>
     </li>
     @endif
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="">
-        <!-- <i class="fa-solid fa-ranking-star"></i> -->
+        <i class="fa-solid fa-ranking-star"></i>
         <i class="fa fa-file"></i>
             <span><b>Rangking Karyawan</b></span>
         </a>
-    </li>
+    </li> -->
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
