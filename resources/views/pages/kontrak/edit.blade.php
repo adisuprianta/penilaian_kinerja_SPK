@@ -1,6 +1,6 @@
 @extends('layouts.default')
-@section('title','Tambah Pengeluaran')
-@section('header-title','Tambah Pengeluaran')
+@section('title','Edit Kontrak Karyawan')
+@section('header-title','Edit Kontrak Karyawan')
 
 @section('content')
 <div class="card shadow mb-4 col-lg-6">
@@ -112,11 +112,14 @@
 // $(function() {
 //             $('#datepicker').datepicker();
 //         });
-    $(function() {
-        $('#tgl_kerja').datepicker({
-            dateFormat: 'd-m-Y'
+    $( document ).ready(function() {
+        $("#tgl_kerja").datepicker({ 
+            format: 'yyyy-mm-dd',
+            autoclose:true
         });
-    });
+        
+    }); 
+
 
 </script>
 @endpush

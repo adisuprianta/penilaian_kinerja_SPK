@@ -1,36 +1,12 @@
 @extends('layouts.default')
-@section('title','Data user')
-@section('header-title','Data user')
+@section('title','Data Kontrak Karyawan')
+@section('header-title','Data Kontrak Karyawan')
 
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-            @if ($message = Session::get('sukses'))
-                <div class="alert alert-success alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button> 
-                    <strong>{{ $message }}</strong>
-                </div>
-                @endif
-
-                @if ($message = Session::get('gagal'))
-                <div class="alert alert-danger alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button> 
-                    <strong>{{ $message }}</strong>
-                </div>
-                @endif
-
-                @if ($message = Session::get('peringatan'))
-                <div class="alert alert-warning alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button> 
-                    <strong>{{ $message }}</strong>
-                </div>
-                @endif
-                
-                <!-- <a href="" class="btn btn-success mb-4">
-                    Kontrak Kerja
-                    <i class="fa fa-file-signature"></i>
-                </a> -->
+            
                 <table class="table table-striped table-bordered " id="dataTable">
                     <thead>
                         <tr>
@@ -107,29 +83,4 @@
     <!-- Page level custom scripts -->
     <script src="{{asset('assets/js/demo/datatables-demo.js')}}"></script>
     
-    <script>
-        $('.btn-hapus').on('click', function(e){
-            e.preventDefault();
-            let id = $(this).data('id');
-            let form = $('#form-hapus-kontrak-'+id);
-            let username = $(this).data('username');
-
-            Swal.fire({
-            title: 'Apakah anda yakin?',
-            text: username +' akan dihapus',
-            icon: 'warning',
-            showCancelButton: true,
-            cancelButtonColor: '#5bc0de',
-            confirmButtonColor: '#d9534f ',
-            confirmButtonText: 'Ya, hapus!',
-            cancelButtonText: 'Batal',
-            reverseButtons: true,
-            }).then((result) => {
-                if (result.value) {
-                    form.submit();
-                }
-            })
-
-        });
-    </script>
 @endpush

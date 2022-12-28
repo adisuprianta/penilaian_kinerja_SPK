@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Session;
 use Carbon\Carbon;
 use Database\Seeders\PangkatSeeder;
+use RealRashid\SweetAlert\Facades\Alert;
 use Validator;
 
 class KaryawanController extends Controller
@@ -27,6 +28,7 @@ class KaryawanController extends Controller
         return view('pages.karyawan.index',['karyawan'=>$karyawan]);
     }
     public function create(){
+        
         $perusahaan= Perusahaan::get();
         $pangkat = Pangkat_karyawan::get();
         return view('pages.karyawan.create',["perusahaan"=>$perusahaan,"pangkat"=>$pangkat]);
@@ -95,28 +97,26 @@ class KaryawanController extends Controller
         return view("pages.karyawan.edit",["karyawan"=>$karyawan,"pangkat"=>$pangkat,'perusahaan'=>$perusahaan]);
     }
     public function update($id,Request $request){
+        
         $messages= [
             'required' => ':semua data wajib diisi!!!',
             'between' => 'Nilai harus di isi dari :min - :max bukan :input!!!',
             'min' => ':nilai harus diisi minimal :min karakter!!!',
             'max' => ':nilai harus diisi maksimal :max karakter!!!',
             'date'=> ':Nilai inputan harus diisi dengan tanggal',
-            
         ];
+        
         $request->validate([
             'nama_karyawan' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:karyawan'],
-            'nohp' => ['required', 'numeric' ],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'nohp' => ['required', 'numeric','digits:12' ],
             'jkel'=> ['required'],
             'alamat'=>['required','string','max:200'],
             'perusahaan'=>['required'],
             'pangkat'=>['required'],
-            // 'tgl_kerja'=>['required','date'],
             'tgl_lahir'=>['required','date'],
-            // 'status'=> ['required'],
-            // 'berkas'=> ['required|mimes:pdf,docx|max:2048'],
         ],$messages);
-
+        // dd($request->all());
         karyawan::where('id_karyawan',$id)->update([
             'nama_karyawan' => $request->nama_karyawan,
             'id_pangkat'=>$request->pangkat,
@@ -127,7 +127,7 @@ class KaryawanController extends Controller
             'alamat'=>$request->alamat,
             'tanggal_lahir'=> Carbon::parse($request->tgl_lahir)->format('Y-m-d'),
         ]);
-        Session::flash('sukses','Berhasil mengupdate data '.$request->nama_karyawan);
+        Alert::success('sukses','Berhasil mengupdate data '.$request->nama_karyawan);
         return redirect(route('karyawan.index'));
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Session;
 use File;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KontrakController extends Controller
 {
@@ -50,7 +51,7 @@ class KontrakController extends Controller
             'status'=>$request->status
         ]);
         $berkas->move(public_path().'/berkas_kontrak',$nama_berkas);
-        Session::flash('sukses','Berhasil menginputkan data');
+        Alert::success('sukses','Berhasil menginputkan data');
         return redirect(route('kontrak.index'));
     }
     public function edit($id){
@@ -87,7 +88,7 @@ class KontrakController extends Controller
             'status'=>$request->status
         ]);
         $berkas->move(public_path().'/berkas_kontrak',$nama_berkas);
-        Session::flash('sukses','Berhasil mengupdate data');
+        Alert::success('sukses','Berhasil mengupdate data');
         return redirect(route('kontrak.index'));
     }
 }

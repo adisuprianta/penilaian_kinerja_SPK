@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kriteria;
 use App\Models\SubKriteria;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Session;
 class SubKriteriaController extends Controller
 {
@@ -42,7 +43,7 @@ class SubKriteriaController extends Controller
         $kriteria = SubKriteria::where("id_kriteria",$id)->get();
         $this->HitungBobotSubKriteria($kriteria);
 
-        Session::flash('sukses','Berhasil menginputkan data');
+        Alert::success('sukses','Berhasil menginputkan data');
         return redirect(route('sub_kriteria.show',$id));
         // return $request->kriteria;
     }
@@ -132,7 +133,7 @@ class SubKriteriaController extends Controller
         $kriteria = SubKriteria::where("id_kriteria",$id_kriteria->id_kriteria)->get();
         $this->HitungBobotSubKriteria($kriteria);
 
-        Session::flash('sukses','Berhasil mengupdate data');
+        Alert::success('sukses','Berhasil mengupdate data');
         return redirect(route('sub_kriteria.show',$id_kriteria->id_kriteria));
     }
 }

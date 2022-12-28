@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kriteria;
 use App\Models\Pangkat_karyawan;
+use RealRashid\SweetAlert\Facades\Alert;
 use Session;
 class KriteriaController extends Controller
 {
@@ -43,7 +44,7 @@ class KriteriaController extends Controller
         $kriteria = Kriteria::get();
         $this->HitungBobotKriteria($kriteria);
 
-        Session::flash('sukses','Berhasil menginputkan data');
+        Alert::success('sukses','Berhasil menginputkan data');
         return redirect(route('kriteria.index'));
     }
 
@@ -136,7 +137,7 @@ class KriteriaController extends Controller
         $kriteria = Kriteria::get();
         $this->HitungBobotkriteria($kriteria);
 
-        Session::flash('sukses','Berhasil mengupdate data');
+        Alert::success('sukses','Berhasil mengupdate data');
         return redirect(route('kriteria.index'));
     }
 

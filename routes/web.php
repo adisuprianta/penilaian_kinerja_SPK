@@ -37,7 +37,17 @@ Route::group(['middleware' => ['auth']], function() {
 Route::group(['middleware' => ['auth', 'role:manajer']], function() { 
     // Route::get('/dashboard/myprofile', 'App\Http\Controllers\DashboardController@myprofile')->name('dashboard.myprofile');
 
-    
+    Route::resource('/laporan','App\Http\Controllers\LaporanController');
+    Route::post('/laporan','App\Http\Controllers\LaporanController@date_range')->name('laporan.date_range');
+    Route::post('/laporan/cetak_pdf','App\Http\Controllers\LaporanController@cetak_pdf')->name('laporan.cetak_pdf');
+    // Route::resource('/penilaian_manajer','App\Http\Controllers\PenilaianManajerController');
+    Route::get('/penilaian_manajer','App\Http\Controllers\PenilaianManajerController@index')->name('penilaian_manajer.index');
+    Route::put('/penilaian_manajer/update/{id}','App\Http\Controllers\PenilaianManajerController@update')->name('penilaian_manajer.update');
+    Route::put('/penilaian_manajer/hitung','App\Http\Controllers\PenilaianManajerController@hitung')->name('penilaian_manajer.hitung');
+    Route::get('/penilaian_manajer/{id}/create','App\Http\Controllers\PenilaianManajerController@create')->name('penilaian_manajer.create');
+    Route::put('/penilaian_manajer/store/{id}','App\Http\Controllers\PenilaianManajerController@store')->name('penilaian_manajer.store');
+    Route::post('/penilaian_manajer/edit/{id}','App\Http\Controllers\PenilaianManajerController@edit')->name('penilaian_manajer.edit');
+
     Route::resource('/kriteria','App\Http\Controllers\KriteriaController');
     Route::get('/kriteria/create', 'App\Http\Controllers\KriteriaController@create')->name('kriteria.create');
     // Route::put('/kriteria/show/{$id_kriteria}', 'App\Http\Controllers\KriteriaController@show')->name('kriteria.show');

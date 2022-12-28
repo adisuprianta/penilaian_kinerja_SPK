@@ -175,7 +175,8 @@
 //         });
     $(function() {
         $('#tgl_lahir').datepicker({
-            dateFormat: 'd-m-Y'
+            format: 'yyyy-mm-dd',
+            autoclose:true
         });
     });
 

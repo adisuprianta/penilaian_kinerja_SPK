@@ -1,10 +1,11 @@
 @extends('layouts.default')
 @section('title','Data user')
-@section('header-title','Data Karyawan')
+@section('header-title','Penilaian')
 
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-body">
+        <h3 class="float-right card-title h4 mb-4 text-gray-800">Tanggal : {{$tanggal}}</h3>
             <div class="table-responsive">
             @if ($message = Session::get('sukses'))
                 <div class="alert alert-success alert-block">
@@ -26,10 +27,11 @@
                     <strong>{{ $message }}</strong>
                 </div>
                 @endif
-                <a href="{{route('karyawan.create')}}" class="btn btn-success mb-4">
+                <!-- <a href="{{route('karyawan.create')}}" class="btn btn-success mb-4">
                     Tambah
                     <i class="fa fa-plus" aria-hidden="true"></i>
-                </a>
+                </a> -->
+                
                 <!-- <a href="" class="btn btn-success mb-4">
                     Kontrak Kerja
                     <i class="fa fa-file-signature"></i>
@@ -39,23 +41,17 @@
                         <tr>
                             <th scope="col">No.</th>
                             <th scope="col">Nama Karyawan</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">No Hp</th>
                             <th scope="col">Pangkat Karyawan</th>
                             <th scope="col">Perusahaan</th>
                             <th scope="col">Jenis Kelamin</th>
-                            <th scope="col">Alamat</th>
-                            <th scope="col">Tanggal Lahir</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($karyawan as $k)
+                    @foreach($karyawan as $k)
                         <tr>
                             <td>{{ $loop->iteration }}.</td>
                             <td>{{$k->nama_karyawan}}</td>
-                            <th>{{$k->email}}</th>
-                            <th>{{$k->no_hp}}</th>
                             <th>{{$k->nama_pangkat}}</th>
                             <th>{{$k->nama_perusahaan}}</th>
                             @if($k->jenis_kelamin == "L")
@@ -63,33 +59,59 @@
                             @elseif($k->jenis_kelamin == "P")
                             <th>Perempuan</th>
                             @endif
-                            <th>{{$k->alamat}}</th>
-                            <th>{{$k->tanggal_lahir}}</th>
-                            
-                            <th >
-                            <div class="d-flex justify-content-end">
-                                <a class="btn btn-info btn-sm w-100 h-100 "  href="{{route('karyawan.edit',$k->id_karyawan)}}">
-                                    <i class="fas fa-pencil-alt">
-                                    </i>
-                                    Ubah
+                            <th>
+                                @php
+                                $cek=0;
+                                $c=0;
+                                @endphp
+                                @foreach($nilai_sub_kriteria as $nk)
+                                    @if($nk->id_karyawan == $k->id_karyawan)
+                                        @php
+                                           $cek=1;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @foreach($nilai_kriteria as $nk)
+                                    @if($nk->id_karyawan == $k->id_karyawan)
+                                        @php
+                                            $c=1;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @if($c == 0 AND $cek == 0)
+                                <a class="btn btn-info btn-sm w-100 h-100" href="{{route('penilaian_manajer.create',$k->id_karyawan)}}">
+                                   <span>Nilai</span>
                                 </a>
-                                <form action="{{route('karyawan.destroy',$k->id_karyawan)}}" method="post" class="ml-2 d-inline" id="{{'form-hapus-karyawan-'.$k->id_karyawan}}">
-                                    @method('DELETE')
+                                @else
+                                <form action="{{route('penilaian_manajer.edit',$k->id_karyawan)}}" method="post" class=" d-inline" id="{{'form-hapus-karyawan-'.$k->id_karyawan}}">
+                                <input type="hidden" value="{{$tanggal}}" name="tgl_bobot">
                                     @csrf
-                                    <button class="btn btn-danger btn-sm  btn-hapus w-100 h-100" data-id="{{$k->id_karyawan}}" data-username="{{$k->nama_karyawan}}"  type="submit">
-                                    <i class="fas fa-trash"></i> 
-                                        Hapus
+
+                                    <button class="btn btn-info btn-sm w-100 h-100"  type="submit">
+                                    
+                                        Edit
                                     </button>
                                     </form>
-                            </div>
-                               
+                                
+                                @endif
                             </th>
                         </tr>
-                        @endforeach
+                    @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
+        <div class="card-footer">
+            <form class="form float-right" action="{{route('penilaian_manajer.hitung')}}" method="post" >
+            @method('PUT')
+            @csrf
+                <!-- <input type="hidden" name="_token" value="mKJUfJZxLMNd27JVQGhwnzBV9tyKlCDeuehI8xSf"> -->
+                <!-- <input type="hidden" value="2022-11-13" name="tgl_awal"> -->
+                <input type="hidden" value="{{$tanggal}}" name="tgl">
+                <!-- <input type="hidden" value="bg0" name="id_bagian"> -->
+                <button type="submit" class="btn btn-info btn-hitung mb-2">Hitung</button>
+            </form>
+         </div>
     </div>
 @endsection
 
@@ -105,7 +127,7 @@
 
     <!-- Page level custom scripts -->
     <script src="{{asset('assets/js/demo/datatables-demo.js')}}"></script>
-    @include('sweetalert::alert')php artisan sweetalert:publish
+    
     <script>
         $('.btn-hapus').on('click', function(e){
             e.preventDefault();

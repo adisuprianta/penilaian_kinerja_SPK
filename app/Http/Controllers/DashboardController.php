@@ -84,7 +84,8 @@ class DashboardController extends Controller
             
             $kriteria = Kriteria::get();
             $subkriteria = SubKriteria::get();
-            $nilai_kriteria = nilai_kriteria::select('id_kriteria','id_karyawan',nilai_kriteria::raw('avg(nilai_kriteria) as nilai_kriteria'))->
+            $nilai_kriteria = nilai_kriteria::select('id_kriteria','id_karyawan',bobot_kriteria::raw('avg(bobot_kriteria) as nilai_kriteria'))->
+            join('bobot_kriteria as bk','bk.id_nilai_kriteria','=','nilai_kriteria.id_nilai_kriteria')->
             // select('id_kriteria','id_karyawan')
             // ->groupBy('id_karyawan')->get()
             where('tanggal_nilai',Carbon::now()->format('Y-m-d'))
@@ -92,19 +93,21 @@ class DashboardController extends Controller
             // dd($nilai_kriteria);
             // ->avg('nilai_kriteria');
             $nilai_sub_kriteria=nilai_sub_kriteria::
-            select('id_sub_kriteria','id_karyawan',nilai_sub_kriteria::raw('avg(nilai_sub_kriteria) as nilai_sub_kriteria'))->
+            select('id_sub_kriteria','id_karyawan',bobot_sub_kriteria::raw('avg(bobot_kriteria) as nilai_sub_kriteria'))->
+            join('bobot_sub_kriteria as bsk','bsk.id_nilai_sub_kriteria','=','nilai_sub_kriteria.id_nilai_sub_kriteria')->
             where('tanggal_nilai',Carbon::now()->format('Y-m-d'))
             ->groupBy('id_karyawan','id_sub_kriteria')
             ->get();
             // dd($nilai_sub_kriteria);
             $kar = karyawan::get();
             
-            $karyawan = DB::table('karyawan as k')->select(bobot_akhir::raw('avg(bobot_akhir) as bobot_akhir'),'b.id_karyawan','k.nama_karyawan','id_pangkat')
+            $karyawan = DB::table('karyawan as k')->select(bobot_akhir::raw('avg(bobot_akhir) as bobot_akhir'),'b.id_karyawan','k.nama_karyawan','id_pangkat','nama_perusahaan')
             ->join('bobot_akhir as b','b.id_karyawan','=','k.id_karyawan')
+            ->join('perusahaan_partner as pn','pn.id_perusahaan','=','k.id_perusahaan')
             ->where('tanggal_bobot',Carbon::now()->format('Y-m-d'))
-            ->orderBy('bobot_akhir','desc')->groupBy('id_karyawan','nama_karyawan','id_pangkat')
+            ->orderBy('bobot_akhir','desc')->groupBy('id_karyawan','nama_karyawan','id_pangkat','nama_perusahaan')
             ->get();
-            // dd($karyawan);
+            // dd($karyawan);  
             $terbaik = DB::table('karyawan as k')
             ->join('bobot_akhir as b','b.id_karyawan','=','k.id_karyawan')
             ->where('tanggal_bobot',Carbon::now()->format('Y-m-d'))

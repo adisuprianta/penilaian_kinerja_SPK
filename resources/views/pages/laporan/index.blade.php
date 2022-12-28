@@ -1,112 +1,50 @@
 @extends('layouts.default')
-@section('title','Beranda')
+@section('title','Data user')
 
 @section('content')
-
-<div class="container mb-4">
-        <div class="row">
-            <div class="col-md-12">
-                
-            </div>
-        </div>
-        <!-- home -->
-		<div class="row home">
-            <div class="col-md-10 offset-1 content-home">
-                <div class="row">
-                    <div class="col-md-5">
-                        <p >
-                            Aplikasi penilain kinerja karyawan 
-                            ini digunakan untuk menentukan karyawan terbaik melalui 
-                            ranking karyawan yang dapat 
-dilihat setelah melakukan perhitungan metode Analytical Hierarchy Process (AHP) dan metode Simple Additive Weighting (SAW).
-                        </p>
-                    </div>
-                    <div class="col-md-6 image">
-                        <img src="{{asset('img/home-logo.png')}}" alt="" height="240">
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-        <!-- grafik -->
-        <h3 class="judul-grafik">GRAFIK INFORMASI RANGKING KARYAWAN</h3>
-        <div class="row grafik">
-        <div class="col-md-10 offset-1">
-            <div class="row">
-                <div class="col-sm-8 col-lg-4">
-                    <div class="card text-white bg-flat-color-1">
-                        <div class="card-body pb-0">
-                            <h4 class="mb-0 text-light">
-                            Jumlah Karyawan
-                            </h4>
-                            <h5 class="text-light">{{$jumlah}} Orang</h5>
-
-                        </div>
-                        <div class="chart-wrapper px-0" style="height:70px;" height="70">
-                            <canvas id="widgetChart3"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-8 col-lg-4">
-                    <div class="card text-white bg-flat-color-3">
-                        <div class="card-body pb-0">
-                            <h4 class="mb-0 text-light">
-                                Karyawan Terbaik
-                            </h4>
-                            <p class="text-light">
-                                @if($terbaik != null)
-                                    {{$terbaik->nama_karyawan}}
-                                @endif
-                            </p>
-                            <p> 
-                                @if($terbaik != null)
-                                    Nilai : {{number_format($terbaik->bobot_akhir/10,2)}}
-                                @endif
-                            </p>
-                            <div class="chart-wrapper px-0" style="height:70px;" height="70">
-                                <canvas id="widgetChart1"></canvas>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-                <!--/.col-->
-
-                <div class="col-sm-8 col-lg-4">
-                    <div class="card text-white bg-flat-color-2">
-                        <div class="card-body pb-0">
-                            <h4 class="mb-0 text-light">
-                                Karyawan Terendah
-                            </h4>
-                            <p class="text-light"></p>
-                            <div class="chart-wrapper px-0" style="height:70px;" height="70">
-                                <canvas id="widgetChart2"></canvas>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <!--/.col-->
-
-                
-            </div>
-        </div>
-        
-            
-            <!--/.col-->
-
-            
-        </div>
-    </div>
-
-
     <div class="card shadow mb-4">
     <h3 class="judul-grafik">TABEL RANGKING KARYAWAN</h3>
+        <div class="d-flex justify-content-center">
+        <form action="{{route('laporan.date_range')}}"method="post" >
+            @csrf    
+            <div class="form-inline">
+                
+                <div class="mb-3 form-group">
+                    <label for="inputPassword" class="col-sm-4 pr-0 pl-0  col-form-label">Tanggal Awal</label>
+                    <div class="col-sm-8 input-group date pr-0 pl-0" id="min">
+                        <input type="text"  name="form_date" class="form-control" value="{{$min}}" id="from_date" placeholder="Dari Tanggal ">
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-white"> 
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>            
+                        <!-- <input type="text" class="form-control" id="max" name="max"> -->
+                    </div>
+                </div>
+                <div class="mb-3 form-group" >
+                    <label for="inputPassword" class="col-sm-4 pr-0 pl-0  col-form-label">Tanggal Akhir</label>
+                    <div class="col-sm-8 input-group date pr-0 pl-0" id="max">
+                        <input type="text"  name="to_date" class="form-control" value="{{$max}}" id="to_date" placeholder="Sampai Tanggal ">
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-white"> 
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>            
+                        <!-- <input type="text" class="form-control" id="max" name="max"> -->
+                    </div>
+                </div>
+                <div class="mb-3 form-group ml-2" >
+                    <button type="submit" id="btn-seleksi" class="btn btn-success">cari</button>
+                </div>
+                
+            </div>
+            </form>
+        </div>
         <div class="card-body">
+            
             <div class="table-responsive">
                 
-                <table class="table table-striped table-bordered" id="dataTable">
+                <table class="table table-striped table-bordered dataTable" id="dataTable">
                 <thead>
                         
                         <tr>
@@ -211,6 +149,18 @@ dilihat setelah melakukan perhitungan metode Analytical Hierarchy Process (AHP) 
                 </table>
             </div>
         </div>
+        <div class="card-footer">
+            <!-- <a href="{{route('laporan.cetak_pdf')}}" class="btn btn-info btn-hitung mb-2"></a> -->
+            <form class="form float-right" action="{{route('laporan.cetak_pdf')}}" method="post" >
+            @csrf
+                <!-- <input type="hidden" name="_token" value="mKJUfJZxLMNd27JVQGhwnzBV9tyKlCDeuehI8xSf"> -->
+                <!-- <input type="hidden" value="2022-11-13" name="tgl_awal"> -->
+                <input type="hidden" value="{{$min}}" name="form_date">
+                <input type="hidden" value="{{$max}}" name="to_date">
+                <!-- <input type="hidden" value="bg0" name="id_bagian"> -->
+                <button type="submit" class="btn btn-info btn-hitung mb-2">Cetak PDF</button>
+            </form>
+         </div>
     </div>
 @endsection
 
@@ -225,6 +175,31 @@ dilihat setelah melakukan perhitungan metode Analytical Hierarchy Process (AHP) 
     <script src="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{asset('assets/js/demo/datatables-demo.js')}}"></script>
-    
+    <!-- <script src="{{asset('assets/js/demo/datatables-demo.js')}}"></script> -->
+    <script>
+         $(function() {
+            $('#min').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose:true
+            });
+        });
+        $(function() {
+            $('#max').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose:true
+            });
+        });
+
+        $(document).ready(function() {
+        $('#dataTable').DataTable({
+            "language":{
+                "url" : "/assets/vendor/datatables/indonesia.json",
+                "sEmptyTable" : "Tidads"
+            },
+            responsive: true,
+        });
+        });
+
+        
+    </script>
 @endpush

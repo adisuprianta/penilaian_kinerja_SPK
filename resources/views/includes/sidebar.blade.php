@@ -96,19 +96,20 @@
     @endif
     @if (Auth::user()->hasRole('manajer') )
     <li class="nav-item">
-        <a class="nav-link" href="{{route('penilaian.index')}}">
+        <a class="nav-link" href="{{route('penilaian_manajer.index')}}">
             <i class="fa fa-file-signature"></i>
             <span><b>Kinerja Team Leader</b></span>
         </a>
     </li>
-    @endif
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="">
+     <li class="nav-item">
+        <a class="nav-link" href="{{route('laporan.index')}}">
         <i class="fa-solid fa-ranking-star"></i>
         <i class="fa fa-file"></i>
-            <span><b>Rangking Karyawan</b></span>
+            <span><b>Laporan Karyawan</b></span>
         </a>
-    </li> -->
+    </li>
+    @endif
+   
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

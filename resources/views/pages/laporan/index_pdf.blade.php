@@ -1,114 +1,122 @@
-@extends('layouts.default')
-@section('title','Beranda')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
+<head>
 
-<div class="container mb-4">
-        <div class="row">
-            <div class="col-md-12">
-                
-            </div>
-        </div>
-        <!-- home -->
-		<div class="row home">
-            <div class="col-md-10 offset-1 content-home">
-                <div class="row">
-                    <div class="col-md-5">
-                        <p >
-                            Aplikasi penilain kinerja karyawan 
-                            ini digunakan untuk menentukan karyawan terbaik melalui 
-                            ranking karyawan yang dapat 
-dilihat setelah melakukan perhitungan metode Analytical Hierarchy Process (AHP) dan metode Simple Additive Weighting (SAW).
-                        </p>
-                    </div>
-                    <div class="col-md-6 image">
-                        <img src="{{asset('img/home-logo.png')}}" alt="" height="240">
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-        <!-- grafik -->
-        <h3 class="judul-grafik">GRAFIK INFORMASI RANGKING KARYAWAN</h3>
-        <div class="row grafik">
-        <div class="col-md-10 offset-1">
-            <div class="row">
-                <div class="col-sm-8 col-lg-4">
-                    <div class="card text-white bg-flat-color-1">
-                        <div class="card-body pb-0">
-                            <h4 class="mb-0 text-light">
-                            Jumlah Karyawan
-                            </h4>
-                            <h5 class="text-light">{{$jumlah}} Orang</h5>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    
+    
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.css"> -->
+    <style>
+        .table tbody + tbody {
+            border-top: 2px solid #dee2e6;
+        }
+        .card {
+            position: relative;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            border-radius: 0.25rem;
+        }
+        .mb-4{
+            margin-bottom: 1.5rem !important;
+        }
+        table {
+           border-collapse: collapse;
+        }
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+        }
+        .table th,
+        .table td {
+        padding: 0.75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+        }
 
-                        </div>
-                        <div class="chart-wrapper px-0" style="height:70px;" height="70">
-                            <canvas id="widgetChart3"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-8 col-lg-4">
-                    <div class="card text-white bg-flat-color-3">
-                        <div class="card-body pb-0">
-                            <h4 class="mb-0 text-light">
-                                Karyawan Terbaik
-                            </h4>
-                            <p class="text-light">
-                                @if($terbaik != null)
-                                    {{$terbaik->nama_karyawan}}
-                                @endif
-                            </p>
-                            <p> 
-                                @if($terbaik != null)
-                                    Nilai : {{number_format($terbaik->bobot_akhir/10,2)}}
-                                @endif
-                            </p>
-                            <div class="chart-wrapper px-0" style="height:70px;" height="70">
-                                <canvas id="widgetChart1"></canvas>
-                            </div>
+        .table thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #dee2e6;
+        }
 
-                        </div>
+        .table tbody + tbody {
+        border-top: 2px solid #dee2e6;
+        }
 
-                    </div>
-                </div>
-                <!--/.col-->
+        .table-sm th,
+        .table-sm td {
+        padding: 0.3rem;
+        }
 
-                <div class="col-sm-8 col-lg-4">
-                    <div class="card text-white bg-flat-color-2">
-                        <div class="card-body pb-0">
-                            <h4 class="mb-0 text-light">
-                                Karyawan Terendah
-                            </h4>
-                            <p class="text-light"></p>
-                            <div class="chart-wrapper px-0" style="height:70px;" height="70">
-                                <canvas id="widgetChart2"></canvas>
-                            </div>
+        .table-bordered {
+        border: 1px solid #dee2e6;
+        }
 
-                        </div>
-                    </div>
-                </div>
-                <!--/.col-->
+        .table-bordered th,
+        .table-bordered td {
+        border: 1px solid #dee2e6;
+        }
 
-                
-            </div>
-        </div>
+        .table-bordered thead th,
+        .table-bordered thead td {
+        border-bottom-width: 2px;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        .card-body {
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            min-height: 1px;
+            padding: 1.25rem;
+        }
+        .table-bordered th,
+        .table-bordered td {
+            border: 1px solid #dee2e6 !important;
+        }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #212529;
+            text-align: left;
+            background-color: #fff;
+        }
+        .judul-grafik {
+            color: black;
+            font-size: 1.3em;
+            text-align: center;
+            margin-top: 2em;
+        }
         
-            
-            <!--/.col-->
+    </style>
 
-            
-        </div>
-    </div>
+</head>
 
-
+<body >
     <div class="card shadow mb-4">
-    <h3 class="judul-grafik">TABEL RANGKING KARYAWAN</h3>
+    <h3 class="judul-grafik">LAPORAN KINERJA KARYAWAN</h3>
         <div class="card-body">
+            
             <div class="table-responsive">
                 
-                <table class="table table-striped table-bordered" id="dataTable">
+                <table class="table table-striped table-bordered dataTable" id="dataTable">
                 <thead>
-                        
                         <tr>
                             <th rowspan="2" class="align-middle text-center text-capitalize">No.</th>
                             <th rowspan="2" class="align-middle text-center text-capitalize">nama karyawan</th>
@@ -211,20 +219,9 @@ dilihat setelah melakukan perhitungan metode Analytical Hierarchy Process (AHP) 
                 </table>
             </div>
         </div>
+        
     </div>
-@endsection
 
-@push('after-style')
-        <!-- Custom styles for this page -->
-        <link href="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-@endpush
+    </body>
 
-@push('after-script')
-    <!-- Page level plugins -->
-    <script src="{{asset('assets/vendor/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{asset('assets/js/demo/datatables-demo.js')}}"></script>
-    
-@endpush
+</html>

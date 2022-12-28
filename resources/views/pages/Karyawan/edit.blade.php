@@ -48,9 +48,9 @@
                     <option selected></option>
                     @foreach($perusahaan as $p)
                         @if($p->id_perusahaan==$karyawan->id_perusahaan)
-                            <option value="$p->id_perusahaan" selected>{{$p->nama_perusahaan}}</option>
+                            <option value="{{$p->id_perusahaan}}" selected>{{$p->nama_perusahaan}}</option>
                         @else
-                            <option value="$p->id_perusahaan">{{$p->nama_perusahaan}}</option>
+                            <option value="{{$p->id_perusahaan}}">{{$p->nama_perusahaan}}</option>
                         @endif
                         
                     @endforeach
@@ -232,7 +232,8 @@
 //         });
     $(function() {
         $('#tgl_lahir').datepicker({
-            dateFormat: 'd-m-Y'
+            format: 'yyyy-mm-dd',
+            autoclose:true
         });
     });
 
