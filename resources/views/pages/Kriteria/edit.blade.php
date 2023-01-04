@@ -23,7 +23,7 @@
         @csrf
             <div class="form-group">
                 <label for="Kriteria">Nama Sub Kriteria</label>
-                <input type="text" name="kriteria" class="form-control @error('jumlah') is-invalid @enderror" value="{{$kriteria->nama_kriteria}}">
+                <input type="text" name="kriteria"  class="form-control @error('jumlah') is-invalid @enderror" value="{{$kriteria->nama_kriteria}}">
                 @error('kriteria')
                 <div class="text-danger">
                     {{ $message }}
@@ -70,7 +70,7 @@
             </div>
             <div class="form-group">
                 <label for="Nilai Bobot">Nilai Perbandingan Sub Kriteria</label>
-                <input name="nilai" rows="3" id="nilai" class="form-control @error('perincian') is-invalid @enderror" value="{{$kriteria->nilai_perbandingan_kriteria}}"></input>
+                <input name="nilai" rows="3" type="number" max="9" min="1"  id="nilai" class="form-control @error('perincian') is-invalid @enderror" value="{{$kriteria->nilai_perbandingan_kriteria}}"></input>
                 @error('nilai')
                 <div class="text-danger">
                     {{ $message }}

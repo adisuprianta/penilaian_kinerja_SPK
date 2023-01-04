@@ -110,7 +110,7 @@
         $('.btn-hapus').on('click', function(e){
             e.preventDefault();
             let id = $(this).data('id');
-            let form = $('#form-hapus-user-'+id);
+            let form = $('#form-hapus-karyawan-'+id);
             let username = $(this).data('username');
 
             Swal.fire({

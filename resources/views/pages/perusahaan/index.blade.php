@@ -82,7 +82,7 @@
 
     <!-- Page level custom scripts -->
     <script src="{{asset('assets/js/demo/datatables-demo.js')}}"></script>
-    
+    @include('sweetalert::alert')php artisan sweetalert:publish
     <script>
         $('.btn-hapus').on('click', function(e){
             e.preventDefault();

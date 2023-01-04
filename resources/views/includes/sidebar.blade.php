@@ -80,6 +80,7 @@
         </a>
     </li> -->
     @if (Auth::user()->hasRole('user') or Auth::user()->hasRole('team_leader') )
+    
     <li class="nav-item">
         <a class="nav-link" href="{{route('penilaian.index')}}">
             <i class="fa fa-file-signature"></i>
@@ -101,13 +102,29 @@
             <span><b>Kinerja Team Leader</b></span>
         </a>
     </li>
-     <li class="nav-item">
-        <a class="nav-link" href="{{route('laporan.index')}}">
+    <li class="nav-item">
+        <div class="dropdown show ">
+            <!--  -->
+                <a class="nav-link dropdown-toggle"  id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-file"></i>
+                    <span><b>Laporan</b></span>
+                </a>
+            <!-- </li> -->
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="{{route('laporan.show',2)}}">
+                    Laporan Karyawan
+                </a>
+                <a class="dropdown-item" href="{{route('laporan.show',1)}}">Laporan Team Leader</a>
+            </div>
+        </div>
+    </li>
+     <!-- <li class="nav-item">
+        <a class="nav-link" href="{{route('laporan.index',1)}}">
         <i class="fa-solid fa-ranking-star"></i>
         <i class="fa fa-file"></i>
             <span><b>Laporan Karyawan</b></span>
         </a>
-    </li>
+    </li> -->
     @endif
    
 

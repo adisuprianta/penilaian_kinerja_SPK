@@ -24,7 +24,7 @@
                     @if($k->id_kriteria == $sk->id_kriteria)
                     <div class="form-group">
                         <label for="jumlah">{{$sk->nama_sub_kriteria}}</label>
-                        <input type="number" name="namasub{{$sk->id_sub_kriteria}}" class="form-control  @error('namasub$sk->id_sub_kriteria') is-invalid @enderror" min="0" max="100" value="0">
+                        <input type="number" max="5" min="1" value="1" name="namasub{{$sk->id_sub_kriteria}}" class="form-control  @error('namasub$sk->id_sub_kriteria') is-invalid @enderror" >
                         @error('namasub$sk->id_sub_kriteria')
                         <div class="text-danger">
                             {{ $message }}
@@ -41,7 +41,7 @@
                 @else
                 <div class="form-group">
                         <label for="jumlah">{{$k->nama_kriteria}}</label>
-                        <input type="number" name="nama{{$k->id_kriteria}}" class="form-control @error('nama{{$k->id_kriteria}}') is-invalid @enderror" min="0" max="100" value="0">
+                        <input type="number" max="5" min="1" value="1" name="nama{{$k->id_kriteria}}" class="form-control @error('nama{{$k->id_kriteria}}') is-invalid @enderror" >
                         @error('nama{{$k->id_kriteria}}')
                         <div class="text-danger">
                             {{ $message }}

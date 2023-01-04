@@ -128,9 +128,9 @@ dilihat setelah melakukan perhitungan metode Analytical Hierarchy Process (AHP) 
                                     @endif
                                 @endforeach
                                 @if($coll == $k->id_kriteria)
-                                    <th class="align-middle text-center text-capitalize" colspan="{{$jum}}">{{$k->nama_kriteria}}</th>
+                                    <th class="align-middle text-center text-capitalize" colspan="{{$jum}}">{{$k->nama_kriteria}} <span>({{ $k->bobot_kriteria}})</span></th>
                                 @else
-                                    <th rowspan="2" class="align-middle text-center text-capitalize">{{$k->nama_kriteria}}</th>
+                                    <th rowspan="2" class="align-middle text-center text-capitalize">{{$k->nama_kriteria }}</span></th>
                                 @endif
                             @endforeach
                             <th rowspan="2" class="align-middle text-center text-capitalize">Nilai Akhir</th>
@@ -139,7 +139,7 @@ dilihat setelah melakukan perhitungan metode Analytical Hierarchy Process (AHP) 
                             @foreach($kriteria as $k)
                                 @foreach($subkriteria as $sk)
                                     @if($k->id_kriteria == $sk->id_kriteria)
-                                        <th class="align-middle text-capitalize text-center" >{{$sk->nama_sub_kriteria}}</th>
+                                        <th class="align-middle text-capitalize text-center" >{{$sk->nama_sub_kriteria  }} <span>({{($sk->bobot_sub_kriteria)}})</span></th>
                                     @endif
                                 @endforeach
                             @endforeach

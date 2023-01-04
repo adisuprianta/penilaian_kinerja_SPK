@@ -45,7 +45,7 @@
             </div>
             <div class="form-group">
                 <label for="Nilai Bobot">Nilai Perbandingan Sub Kriteria</label>
-                <input name="nilai" rows="3" id="nilai" class="form-control @error('perincian') is-invalid @enderror"></input>
+                <input name="nilai" rows="3" type="number" max="9" min="1" value="1"  id="nilai" class="form-control @error('perincian') is-invalid @enderror"></input>
                 @error('nilai')
                 <div class="text-danger">
                     {{ $message }}

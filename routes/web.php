@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth', 'role:manajer']], function() {
     Route::resource('/laporan','App\Http\Controllers\LaporanController');
     Route::post('/laporan','App\Http\Controllers\LaporanController@date_range')->name('laporan.date_range');
     Route::post('/laporan/cetak_pdf','App\Http\Controllers\LaporanController@cetak_pdf')->name('laporan.cetak_pdf');
+
     // Route::resource('/penilaian_manajer','App\Http\Controllers\PenilaianManajerController');
     Route::get('/penilaian_manajer','App\Http\Controllers\PenilaianManajerController@index')->name('penilaian_manajer.index');
     Route::put('/penilaian_manajer/update/{id}','App\Http\Controllers\PenilaianManajerController@update')->name('penilaian_manajer.update');
@@ -58,9 +59,9 @@ Route::group(['middleware' => ['auth', 'role:manajer']], function() {
     Route::get('/kontrak/{id}/create','App\Http\Controllers\KontrakController@create')->name('kontrak.create');
     Route::put('/kontrak/{id}/store','App\Http\Controllers\KontrakController@store')->name('kontrak.store');
 
-    Route::resource('/pekerjaan_karyawan','App\Http\Controllers\PekerjaanController');
-    Route::get('/pekerjaan_karyawan/create/{id}','App\Http\Controllers\PekerjaanController@create')->name('pekerjaan_karyawan.create');
-    Route::post('/pekerjaan_karyawan/store/{id}','App\Http\Controllers\PekerjaanController@store')->name('pekerjaan_karyawan.store');
+    // Route::resource('/pekerjaan_karyawan','App\Http\Controllers\PekerjaanController');
+    // Route::get('/pekerjaan_karyawan/create/{id}','App\Http\Controllers\PekerjaanController@create')->name('pekerjaan_karyawan.create');
+    // Route::post('/pekerjaan_karyawan/store/{id}','App\Http\Controllers\PekerjaanController@store')->name('pekerjaan_karyawan.store');
  
     Route::resource('/perusahaan','App\Http\Controllers\PerusahaanController');
 

@@ -30,7 +30,7 @@ class KriteriaController extends Controller
         $request->validate([
             'kriteria' => ['required', 'string', 'max:255'],
             'pangkat'=>['required'],
-            'nilai' => ['required', 'numeric','between: 1,100' ],
+            'nilai' => ['required', 'numeric','between: 1,9' ],
             'golongan'=>['required'],
         ],$messages);
 
@@ -124,7 +124,7 @@ class KriteriaController extends Controller
         $request->validate([
             'kriteria' => ['required', 'string', 'max:255'],
             'pangkat'=>['required'],
-            'nilai' => ['required', 'numeric','between: 1,100' ],
+            'nilai' => ['required', 'numeric','between: 1,9' ],
             'golongan'=>['required'],
         ],$messages);
 
@@ -142,6 +142,11 @@ class KriteriaController extends Controller
     }
 
     public function destroy($id){
-        return redirect()->back();
+        $kriteria =Kriteria::find();
+        $kriteria->delete();
+        $kriteria = Kriteria::get();
+        $this->HitungBobotKriteria($kriteria);
+        Alert::success('sukses','Berhasil delete data');
+        return redirect(route('kriteria.index'));
     }
 }

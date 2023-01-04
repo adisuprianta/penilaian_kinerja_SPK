@@ -648,7 +648,7 @@ class PenilaianController extends Controller
                 }
                 // echo "<br>";
             }
-            
+            // dd($normalisasi);
             //ambil nilai bobot
             $subkriteria = SubKriteria::where('id_kriteria',$id_kriteria)->get();
             $bobot = array();
@@ -704,7 +704,7 @@ class PenilaianController extends Controller
                 // echo $i;
                 $jumlah_bobot[$i] = 0;
                 for($j=0;$j<count($saw); $j++){
-                    $jumlah_bobot[$i] += number_format($nilai_bobot[$j][$i] * 100,2);
+                    $jumlah_bobot[$i] += number_format($nilai_bobot[$j][$i] ,2);
                         
                     
                 }
@@ -761,7 +761,10 @@ class PenilaianController extends Controller
             ->where('k.id_pangkat','1')
             // ->where('id_user',Auth::user()->id)
             ->get();
-            $user = array();
+            if(count($nilaikriteria)== 0){
+            //   dd($jumlah_bobot);  
+            }else{
+                $user = array();
             $id_karyawan = array();
             $saw = array();
             $id = array();
@@ -932,6 +935,8 @@ class PenilaianController extends Controller
                         ]);
                     }
             }
+            }
+            
         }else{
 
         }
@@ -1082,7 +1087,7 @@ class PenilaianController extends Controller
                 // echo $i;
                 $jumlah_bobot[$i] = 0;
                 for($j=0;$j<count($saw); $j++){
-                    $jumlah_bobot[$i] += number_format($nilai_bobot[$j][$i] * 100,2);
+                    $jumlah_bobot[$i] += number_format($nilai_bobot[$j][$i] ,2);
                         
                     
                 }

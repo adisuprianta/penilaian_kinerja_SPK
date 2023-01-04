@@ -26,7 +26,7 @@
                     <strong>{{ $message }}</strong>
                 </div>
                 @endif
-                <a href="{{route('pekerjaan_karyawan.create',$id)}}" class="btn btn-success mb-4">
+                <a href="" class="btn btn-success mb-4">
                     Tambah
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </a>

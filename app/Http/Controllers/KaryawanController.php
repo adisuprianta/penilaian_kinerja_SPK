@@ -17,15 +17,21 @@ use Validator;
 
 class KaryawanController extends Controller
 {
-    public function show($id){
-        // return "a";
-        $karyawan=karyawan::select('nama_karyawan')->find($id);
-        $pekerjaan = Pekerjaan_karyawan::get();
-        return view("pages.pekerjaan_karyawan.index",["id"=>$id,"pekerjaan"=>$pekerjaan,'karyawan'=>$karyawan]);
-    }
+    // public function show($id){
+    //     // return "a";
+    //     $karyawan=karyawan::select('nama_karyawan')->find($id);
+    //     $pekerjaan = Pekerjaan_karyawan::get();
+    //     return view("pages.pekerjaan_karyawan.index",["id"=>$id,"pekerjaan"=>$pekerjaan,'karyawan'=>$karyawan]);
+    // }
     public function index(){
         $karyawan=karyawan::join('pangkat_karyawan','id_pangkat','=','id_pangkat_karyawan')->join('perusahaan_partner as p', 'p.id_perusahaan','=','karyawan.id_perusahaan')->get();
         return view('pages.karyawan.index',['karyawan'=>$karyawan]);
+    }
+    public function destroy($id){
+        $karyawan = karyawan::find($id);
+        $karyawan->delete();
+        Alert::success('sukses','Berhasil menginputkan data');
+        return redirect(route('karyawan.index'));
     }
     public function create(){
         
