@@ -26,11 +26,17 @@ class PerusahaanController extends Controller
         ];
         $request->validate([
             'nama' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:perusahaan_partner'],
+            'nohp' => ['required', 'numeric' ],
+            'kota'=>['required', 'string', 'max:255'],
             'alamat'=>['required','string','max:200'],
         ],$messages);
         $perusahaan=Perusahaan::create([
             'nama_perusahaan'=>$request->nama,
             'alamat_perusahaan'=>$request->alamat,
+            'kota'=>$request->kota,
+            'nomor_perusahaan'=>$request->nohp,
+            'email_perusahaan'=>$request->email,
         ]);
 
         Session::flash('sukses','Data Perusahaan '.$perusahaan->nama_perusahaan .' berhasil dimasukan');
@@ -51,11 +57,17 @@ class PerusahaanController extends Controller
         ];
         $request->validate([
             'nama' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', ],
+            'nohp' => ['required', 'numeric' ],
+            'kota'=>['required', 'string', 'max:255'],
             'alamat'=>['required','string','max:200'],
         ],$messages);
         $perusahaan=Perusahaan::where('id_perusahaan',$id)->update([
             'nama_perusahaan'=>$request->nama,
             'alamat_perusahaan'=>$request->alamat,
+            'kota'=>$request->kota,
+            'nomor_perusahaan'=>$request->nohp,
+            'email_perusahaan'=>$request->email,
         ]);
 
         Session::flash('sukses','Data Perusahaan '.$request->nama .' berhasil diubah');

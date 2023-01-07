@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('title','Data Sub Kriteria')
-@section('header-title','Data Sub Kriteria')
+@section('header-title','Data Sub Kriteria '.$kriteria->nama_kriteria)
 
 @section('content')
     <div class="card shadow mb-4">

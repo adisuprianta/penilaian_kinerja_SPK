@@ -58,10 +58,12 @@ class DashboardController extends Controller
             // dd($ni);
         }elseif(Auth::user()->hasRole('team_leader')){
             $perusahaan = role_user_perusahaan::find(Auth::user()->id);
-
-            $kriteria = Kriteria::get();
+            $con = new KriteriaController();
+            $kriteria = Kriteria::where('id_pangkat','2')->get();
+            $con->HitungBobotKriteria($kriteria);
+            $kriteria = Kriteria::where('id_pangkat','2')->get();
             $subkriteria = SubKriteria::get();
-            $nilai_kriteria = nilai_kriteria::where('id_user',Auth::user()->id)->select('id_kriteria','id_karyawan',bobot_kriteria::raw('avg(bobot_kriteria) as nilai_kriteria'))->
+            $nilai_kriteria = nilai_kriteria::where('bk.id_user',Auth::user()->id)->select('id_kriteria','id_karyawan',bobot_kriteria::raw('avg(bobot_kriteria) as nilai_kriteria'))->
             join('bobot_kriteria as bk','bk.id_nilai_kriteria','=','nilai_kriteria.id_nilai_kriteria')->
             // select('id_kriteria','id_karyawan')
             // ->groupBy('id_karyawan')->get()

@@ -26,7 +26,129 @@
                             @if($ns->id_sub_kriteria == $sk->id_sub_kriteria)    
                                 <div class="form-group">
                                     <label for="jumlah">{{$sk->nama_sub_kriteria}}</label>
-                                    <input type="number" max="5" min="1"  name="namasub{{$sk->id_sub_kriteria}}" class="form-control  @error('namasub$sk->id_sub_kriteria') is-invalid @enderror"  value="{{$ns->nilai_sub_kriteria}}">
+                                    @if($ns->nilai_sub_kriteria == 1)
+                                    <div class="form-check ">
+                                        <input class="form-check-input" checked type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">Kurang Sekali</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="2">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div><div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="3">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="4">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup Baik</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="5">
+                                        <label class="form-check-label" for="inlineRadio2">Baik</label>
+                                    </div>
+                                    @elseif($ns->nilai_sub_kriteria == 2)
+                                    <div class="form-check ">
+                                        <input class="form-check-input"  type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">Kurang Sekali</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" checked type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="2">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div><div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="3">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="4">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup Baik</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="5">
+                                        <label class="form-check-label" for="inlineRadio2">Baik</label>
+                                    </div>
+                                    @elseif($ns->nilai_sub_kriteria == 3)
+                                    <div class="form-check ">
+                                        <input class="form-check-input"  type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">Kurang Sekali</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="2">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div><div class="form-check ">
+                                        <input class="form-check-input" checked type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="3">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="4">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup Baik</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="5">
+                                        <label class="form-check-label" for="inlineRadio2">Baik</label>
+                                    </div>
+                                    @elseif($ns->nilai_sub_kriteria == 4)
+                                    <div class="form-check ">
+                                        <input class="form-check-input"  type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">Kurang Sekali</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="2">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div><div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="3">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" checked type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="4">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup Baik</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="5">
+                                        <label class="form-check-label" for="inlineRadio2">Baik</label>
+                                    </div>
+                                    @elseif($ns->nilai_sub_kriteria == 5)
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">Kurang Sekali</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="2">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div><div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="3">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="4">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" checked type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="5">
+                                        <label class="form-check-label" for="inlineRadio2">Baik</label>
+                                    </div>
+                                    @else
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">Kurang Sekali</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="2">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div><div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="3">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="4">
+                                        <label class="form-check-label" for="inlineRadio2">Baik</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="5">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div>
+                                    @endif
+                                   
+                                    <!-- <input type="number" max="5" min="1"  name="namasub{{$sk->id_sub_kriteria}}" class="form-control  @error('namasub$sk->id_sub_kriteria') is-invalid @enderror"  value="{{$ns->nilai_sub_kriteria}}"> -->
                                     @error('namasub$sk->id_sub_kriteria')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -47,7 +169,128 @@
                         @if($nk->id_kriteria == $k->id_kriteria)        
                             <div class="form-group">
                                 <label for="jumlah">{{$k->nama_kriteria}}</label>
-                                <input type="number" name="nama{{$k->id_kriteria}}" class="form-control @error('nama{{$k->id_kriteria}}') is-invalid @enderror" min="1" max="5" value="{{$nk->nilai_kriteria}}">
+                                @if($nk->nilai_kriteria == 1)
+                                    <div class="form-check ">
+                                        <input class="form-check-input" checked type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">Kurang Sekali</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="2">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div><div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="3">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="4">
+                                        <label class="form-check-label" for="inlineRadio2">Baik</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="5">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div>
+                                    @elseif($nk->nilai_kriteria == 2)
+                                    <div class="form-check ">
+                                        <input class="form-check-input"  type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">Kurang Sekali</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" checked type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="2">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div><div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="3">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="4">
+                                        <label class="form-check-label" for="inlineRadio2">Baik</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="5">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div>
+                                    @elseif($nk->nilai_kriteria == 3)
+                                    <div class="form-check ">
+                                        <input class="form-check-input"  type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">Kurang Sekali</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="2">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div><div class="form-check ">
+                                        <input class="form-check-input" checked type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="3">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="4">
+                                        <label class="form-check-label" for="inlineRadio2">Baik</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="5">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div>
+                                    @elseif($nk->nilai_kriteria == 4)
+                                    <div class="form-check ">
+                                        <input class="form-check-input"  type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">Kurang Sekali</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="2">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div><div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="3">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" checked type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="4">
+                                        <label class="form-check-label" for="inlineRadio2">Baik</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="5">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div>
+                                    @elseif($nk->nilai_kriteria == 5)
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">Kurang Sekali</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="2">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div><div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="3">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="4">
+                                        <label class="form-check-label" for="inlineRadio2">Baik</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" checked type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="5">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div>
+                                    @else
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">Kurang Sekali</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="2">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div><div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="3">
+                                        <label class="form-check-label" for="inlineRadio2">Cukup</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="4">
+                                        <label class="form-check-label" for="inlineRadio2">Baik</label>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="5">
+                                        <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                                    </div>
+                                    @endif
+                                <!-- <input type="number" name="nama{{$k->id_kriteria}}" class="form-control @error('nama{{$k->id_kriteria}}') is-invalid @enderror" min="1" max="5" value="{{$nk->nilai_kriteria}}"> -->
                                 @error('nama{{$k->id_kriteria}}')
                                 <div class="text-danger">
                                     {{ $message }}

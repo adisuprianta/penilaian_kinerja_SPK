@@ -157,17 +157,7 @@ class LaporanController extends Controller
     }
     public function cetak_pdf(Request $request ){
         $id=$request->id;
-        if($id==2){
-            
-            $kriteria = Kriteria::where('id_pangkat',$id)->get();
-            $con = new KriteriaController();
-            $con->HitungBobotKriteria($kriteria);
-        }else{
-            $kriteria = Kriteria::get();
-            $con = new KriteriaController();
-            $con->HitungBobotKriteria($kriteria);
-            
-        }
+       
         $subkriteria = SubKriteria::get();
         if($request->from_date == null && $request->to_date == null){
             $min = Carbon::now()->format('Y-m-d');
@@ -176,13 +166,34 @@ class LaporanController extends Controller
             $min = $request->form_date;
             $max = $request->to_date;
         }
-        
-        $karyawan = DB::table('karyawan as k')->select(bobot_akhir::raw('avg(bobot_akhir) as bobot_akhir'),'b.id_karyawan','k.nama_karyawan','id_pangkat','nama_perusahaan')
+        if($id==2){
+            
+            $kriteria = Kriteria::where('id_pangkat',$id)->get();
+            $con = new KriteriaController();
+            $con->HitungBobotKriteria($kriteria);
+            $karyawan = DB::table('karyawan as k')->select(bobot_akhir::raw('avg(bobot_akhir) as bobot_akhir'),'b.id_karyawan','k.nama_karyawan','id_pangkat','nama_perusahaan')
             ->join('bobot_akhir as b','b.id_karyawan','=','k.id_karyawan')
             ->join('perusahaan_partner as pn','pn.id_perusahaan','=','k.id_perusahaan')
+            ->where('id_pangkat',$id)
             ->whereBetween('tanggal_bobot',array($min, $max))
             ->orderBy('bobot_akhir','desc')->groupBy('id_karyawan','nama_karyawan','id_pangkat','nama_perusahaan')
             ->get();
+        }else{
+            $kriteria = Kriteria::get();
+            $con = new KriteriaController();
+            $con->HitungBobotKriteria($kriteria);
+            $kriteria = Kriteria::where('id_pangkat',$id)->get();
+            $con = new KriteriaController();
+            $con->HitungBobotKriteria($kriteria);
+            $karyawan = DB::table('karyawan as k')->select(bobot_akhir::raw('avg(bobot_akhir) as bobot_akhir'),'b.id_karyawan','k.nama_karyawan','id_pangkat','nama_perusahaan')
+            ->join('bobot_akhir as b','b.id_karyawan','=','k.id_karyawan')
+            ->join('perusahaan_partner as pn','pn.id_perusahaan','=','k.id_perusahaan')
+            ->where('id_pangkat',$id)
+            ->whereBetween('tanggal_bobot',array($min, $max))
+            ->orderBy('bobot_akhir','desc')->groupBy('id_karyawan','nama_karyawan','id_pangkat','nama_perusahaan')
+            ->get();
+        }
+        
             $nilai_kriteria = nilai_kriteria::select('id_kriteria','nilai_kriteria.id_karyawan',bobot_kriteria::raw('avg(bobot_kriteria) as nilai_kriteria'))->
             join('bobot_kriteria as bk','bk.id_nilai_kriteria','=','nilai_kriteria.id_nilai_kriteria')
             ->join('karyawan as k','k.id_karyawan','=','nilai_kriteria.id_karyawan')
@@ -200,7 +211,7 @@ class LaporanController extends Controller
             ->groupBy('id_karyawan','id_sub_kriteria')
             ->get();
         // dd(1);
-        $pdf= PDF::loadview('pages.laporan.index_pdf',['id'=>$id,'min'=>$min,'max'=>$max,'karyawan'=>$karyawan,'nilai_sub_kriteria'=>$nilai_sub_kriteria,'nilai_kriteria'=>$nilai_kriteria,'kriteria'=>$kriteria,'subkriteria'=>$subkriteria])->setPaper('a4', 'landscape');
+        $pdf= PDF::loadview('pages.laporan.index_pdf',['id'=>$id,'min'=>$min,'max'=>$max,'karyawan'=>$karyawan,'nilai_sub_kriteria'=>$nilai_sub_kriteria,'nilai_kriteria'=>$nilai_kriteria,'kriteria'=>$kriteria,'subkriteria'=>$subkriteria])->setPaper('a3', 'landscape');
         // return view('pages.laporan.index_pdf',['min'=>$min,'max'=>$max,'karyawan'=>$karyawan,'nilai_sub_kriteria'=>$nilai_sub_kriteria,'nilai_kriteria'=>$nilai_kriteria,'kriteria'=>$kriteria,'subkriteria'=>$subkriteria]);
         return $pdf->download('Laporan-Kinerja-Karyawan.pdf');
         // $karyawan=karyawan::join('pangkat_karyawan','id_pangkat','=','id_pangkat_karyawan')->join('perusahaan_partner as p', 'p.id_perusahaan','=','karyawan.id_perusahaan')->get();

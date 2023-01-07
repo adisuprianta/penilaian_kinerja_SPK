@@ -35,7 +35,11 @@
                         <tr>
                             <th>No.</th>
                             <th>Nama Pekerjaan</th>
+                            <th>Email</th>
+                            <th>Nomor Perusahaan</th>
+                            <th>Kota </th>
                             <th>Alamat Perusahaan</th>
+                            
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -44,9 +48,13 @@
                         <tr>
                             <td>{{ $loop->iteration }}.</td>
                             <td>{{$p->nama_perusahaan}}</td>
+                            <td>{{$p->email_perusahaan}}</td>
+                            <td>{{$p->nomor_perusahaan}}</td>
+                            <td>{{$p->kota}}</td>
                             <td>{{$p->alamat_perusahaan}}</td>
                             
                             <th>
+                            <div class="d-flex justify-content-end">
                                 <a class="btn btn-info btn-sm mb-1 mr-1 d-inline" href="{{route('perusahaan.edit',$p->id_perusahaan)}}">
                                     <i class="fas fa-pencil-alt">
                                     </i>
@@ -60,6 +68,7 @@
                                         Hapus
                                     </button>
                                     </form>
+                            </div>
                             </th>
                         </tr>
                         @endforeach

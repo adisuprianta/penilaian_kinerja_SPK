@@ -51,7 +51,7 @@ class KaryawanController extends Controller
         $request->validate([
             'nama_karyawan' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:karyawan'],
-            'nohp' => ['required', 'numeric','digits:12' ],
+            'nohp' => ['required', 'numeric' ],
             'jkel'=> ['required'],
             'alamat'=>['required','string','max:200'],
             'perusahaan'=>['required'],
@@ -115,7 +115,7 @@ class KaryawanController extends Controller
         $request->validate([
             'nama_karyawan' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'nohp' => ['required', 'numeric','digits:12' ],
+            'nohp' => ['required', 'numeric' ],
             'jkel'=> ['required'],
             'alamat'=>['required','string','max:200'],
             'perusahaan'=>['required'],

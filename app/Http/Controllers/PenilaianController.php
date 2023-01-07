@@ -104,18 +104,89 @@ class PenilaianController extends Controller
     }
     public function store(Request $request,$id){
         $messages= [
-            'required' => ':semua data wajib diisi!!!',
+            'required' => 'semua data wajib diisi!!!',
             'between' => 'Nilai harus di isi dari :min - :max bukan :input!!!',
             'min' => ':nilai harus diisi minimal :min karakter!!!',
             'max' => ':nilai harus diisi maksimal :max karakter!!!',
             'date'=> ':Nilai inputan harus diisi dengan tanggal',
             
         ];
+        $karyawan = karyawan::find($id);
+        // $cek = array();
+        if($karyawan->id_pangkat ==2){
+            $kriteria = Kriteria::where('id_pangkat','2')
+            ->get();
+            $subkriteria = SubKriteria::get(); 
+            $i = 0;        
+            foreach($kriteria as $k){
+                $no=0;
+                // $cek[$i] =0; 
+                foreach($subkriteria as $sk){
+                    if($k->id_kriteria == $sk->id_kriteria){
+                        $namasub = "namasub".$sk->id_sub_kriteria;
+                        // $cek[$i]=$namasub;
+                        $no=$k->id_kriteria;
+                        $request->validate([
+                            $namasub => 'required',
+                        ],$messages);
+                    }
+                    
+                }
+                echo "<br>";
+                if($k->id_kriteria == $no){
+                    
+                }else{
+                    $nama= "nama".$k->id_kriteria;
+                    $request->validate([
+                        $nama => 'required',
+                    ],$messages);
+                    // echo $request->$nama;
+                    // $cek[$i]=$nama;
+                }
+                $i++;
+            
+            }
+        }else{
+            $kriteria = Kriteria::get();
+            $subkriteria = SubKriteria::get(); 
+            $i = 0;        
+            foreach($kriteria as $k){
+                $no=0;
+                // $cek[$i] =0; 
+                foreach($subkriteria as $sk){
+                    if($k->id_kriteria == $sk->id_kriteria){
+                        $namasub = "namasub".$sk->id_sub_kriteria;
+                        // $cek[$i]=$namasub;
+                        $no=$k->id_kriteria;
+                        $request->validate([
+                            $namasub => 'required',
+                        ],$messages);
+                    }
+                    
+                }
+                echo "<br>";
+                if($k->id_kriteria == $no){
+                    
+                }else{
+                    $nama= "nama".$k->id_kriteria;
+                    $request->validate([
+                        $nama => 'required',
+                    ],$messages);
+                    // echo $request->$nama;
+                    // $cek[$i]=$nama;
+                }
+                $i++;
+            
+            }
+        }
+        // dd($cek);
         $request->validate([
             '*' => 'required',
         ],$messages);
+
+        // dd($request->all());
         $karyawan = karyawan::find($id);
-        if($karyawan->id_pangkat ===2){
+        if($karyawan->id_pangkat ==2){
             $kriteria = Kriteria::where('id_pangkat','2')
             ->get();
             $subkriteria = SubKriteria::get();         
@@ -225,6 +296,74 @@ class PenilaianController extends Controller
             'date'=> ':Nilai inputan harus diisi dengan tanggal',
             
         ];
+        $karyawan = karyawan::find($id);
+        // $cek = array();
+        if($karyawan->id_pangkat ==2){
+            $kriteria = Kriteria::where('id_pangkat','2')
+            ->get();
+            $subkriteria = SubKriteria::get(); 
+            $i = 0;        
+            foreach($kriteria as $k){
+                $no=0;
+                // $cek[$i] =0; 
+                foreach($subkriteria as $sk){
+                    if($k->id_kriteria == $sk->id_kriteria){
+                        $namasub = "namasub".$sk->id_sub_kriteria;
+                        // $cek[$i]=$namasub;
+                        $no=$k->id_kriteria;
+                        $request->validate([
+                            $namasub => 'required',
+                        ],$messages);
+                    }
+                    
+                }
+                echo "<br>";
+                if($k->id_kriteria == $no){
+                    
+                }else{
+                    $nama= "nama".$k->id_kriteria;
+                    $request->validate([
+                        $nama => 'required',
+                    ],$messages);
+                    // echo $request->$nama;
+                    // $cek[$i]=$nama;
+                }
+                $i++;
+            
+            }
+        }else{
+            $kriteria = Kriteria::get();
+            $subkriteria = SubKriteria::get(); 
+            $i = 0;        
+            foreach($kriteria as $k){
+                $no=0;
+                // $cek[$i] =0; 
+                foreach($subkriteria as $sk){
+                    if($k->id_kriteria == $sk->id_kriteria){
+                        $namasub = "namasub".$sk->id_sub_kriteria;
+                        // $cek[$i]=$namasub;
+                        $no=$k->id_kriteria;
+                        $request->validate([
+                            $namasub => 'required',
+                        ],$messages);
+                    }
+                    
+                }
+                echo "<br>";
+                if($k->id_kriteria == $no){
+                    
+                }else{
+                    $nama= "nama".$k->id_kriteria;
+                    $request->validate([
+                        $nama => 'required',
+                    ],$messages);
+                    // echo $request->$nama;
+                    // $cek[$i]=$nama;
+                }
+                $i++;
+            
+            }
+        }
         $request->validate([
             '*' => 'required',
         ],$messages);

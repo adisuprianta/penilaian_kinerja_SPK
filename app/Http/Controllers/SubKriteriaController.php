@@ -14,11 +14,13 @@ class SubKriteriaController extends Controller
     // }
     public function show($id){
         // return "a";
+        
         $subkriteria = SubKriteria::where("id_kriteria",$id)->get();
-        return view("pages.subkriteria.index",["id"=>$id,"subkriteria"=>$subkriteria]);
+        return view("pages.subkriteria.index",["id"=>$id,"subkriteria"=>$subkriteria,"kriteria"=>$kriteria]);
     }
     public function create($id){
-        return view("pages.subkriteria.create",["id"=>$id]);
+        $kriteria = Kriteria::find($id);
+        return view("pages.subkriteria.create",["id"=>$id,"kriteria"=>$kriteria]);
     }
     public function masukandata($id,Request $request){
         $messages = [

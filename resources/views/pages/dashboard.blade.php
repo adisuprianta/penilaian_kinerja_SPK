@@ -58,11 +58,7 @@ dilihat setelah melakukan perhitungan metode Analytical Hierarchy Process (AHP) 
                                     {{$terbaik->nama_karyawan}}
                                 @endif
                             </p>
-                            <p> 
-                                @if($terbaik != null)
-                                    Nilai : {{number_format($terbaik->bobot_akhir/10,2)}}
-                                @endif
-                            </p>
+                           
                             <div class="chart-wrapper px-0" style="height:70px;" height="70">
                                 <canvas id="widgetChart1"></canvas>
                             </div>

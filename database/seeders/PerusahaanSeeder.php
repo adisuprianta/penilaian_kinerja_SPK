@@ -14,13 +14,19 @@ class PerusahaanSeeder extends Seeder
      */
     public function run()
     {
-        Perusahaan::insert([
+        Perusahaan::insert([[
             'nama_perusahaan'=>'BCA',
-            'alamat_perusahaan'=>'surabaya',
+            'alamat_perusahaan'=>'surabaya, wiyung',
+            'kota'=>'surabaya',
+            'email_perusahaan'=>'officialbca@gmail.com',
+            'nomor_perusahaan'=>'000000000000',
         ],
         [
             'nama_perusahaan'=>'BNI',
-            'alamat_perusahaan'=>'surabaya',      
-        ]);
+            'alamat_perusahaan'=>'denpasar,bali ',
+            'kota'=>'denpasar',
+            'email_perusahaan'=>'officialbni@gmail.com',
+            'nomor_perusahaan'=>'000000000000',      
+        ]]);
     }
 }

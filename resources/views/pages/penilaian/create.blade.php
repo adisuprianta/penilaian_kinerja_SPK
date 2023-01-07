@@ -24,7 +24,26 @@
                     @if($k->id_kriteria == $sk->id_kriteria)
                     <div class="form-group">
                         <label for="jumlah">{{$sk->nama_sub_kriteria}}</label>
-                        <input type="number" max="5" min="1" value="1" name="namasub{{$sk->id_sub_kriteria}}" class="form-control  @error('namasub$sk->id_sub_kriteria') is-invalid @enderror" >
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio1" value="1">
+                            <label class="form-check-label" for="inlineRadio1">Kurang Sekali</label>
+                        </div>
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="2">
+                            <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                        </div><div class="form-check ">
+                            <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="3">
+                            <label class="form-check-label" for="inlineRadio2">Cukup</label>
+                        </div>
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="4">
+                            <label class="form-check-label" for="inlineRadio2">Cukup Baik</label>
+                        </div>
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="namasub{{$sk->id_sub_kriteria}}" id="inlineRadio2" value="5">
+                            <label class="form-check-label" for="inlineRadio2">Baik</label>
+                        </div>
+                        <!-- <input type="number" max="5" min="1" value="1" name="namasub{{$sk->id_sub_kriteria}}" class="form-control  @error('namasub$sk->id_sub_kriteria') is-invalid @enderror" > -->
                         @error('namasub$sk->id_sub_kriteria')
                         <div class="text-danger">
                             {{ $message }}
@@ -41,7 +60,27 @@
                 @else
                 <div class="form-group">
                         <label for="jumlah">{{$k->nama_kriteria}}</label>
-                        <input type="number" max="5" min="1" value="1" name="nama{{$k->id_kriteria}}" class="form-control @error('nama{{$k->id_kriteria}}') is-invalid @enderror" >
+                        
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio1" value="1">
+                            <label class="form-check-label" for="inlineRadio1">Kurang Sekali</label>
+                        </div>
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="2">
+                            <label class="form-check-label" for="inlineRadio2">Kurang</label>
+                        </div><div class="form-check ">
+                            <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="3">
+                            <label class="form-check-label" for="inlineRadio2">Cukup</label>
+                        </div>
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="4">
+                            <label class="form-check-label" for="inlineRadio2">Cukup Baik</label>
+                        </div>
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="nama{{$k->id_kriteria}}" id="inlineRadio2" value="5">
+                            <label class="form-check-label" for="inlineRadio2">Baik</label>
+                        </div>
+                        <!-- <input type="number" max="5" min="1" value="1" name="nama{{$k->id_kriteria}}" class="form-control @error('nama{{$k->id_kriteria}}') is-invalid @enderror" > -->
                         @error('nama{{$k->id_kriteria}}')
                         <div class="text-danger">
                             {{ $message }}
