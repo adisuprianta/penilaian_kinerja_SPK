@@ -82,6 +82,7 @@ class LaporanController extends Controller
             $kriteria = Kriteria::where('id_pangkat',$id)->get();
             $con = new KriteriaController();
             $con->HitungBobotKriteria($kriteria);
+            // dd($id);
         }else{
             $kriteria = Kriteria::get();
             $con = new KriteriaController();
@@ -89,7 +90,7 @@ class LaporanController extends Controller
             
         }
         $subkriteria = SubKriteria::get();
-        if($request->from_date == null && $request->to_date == null){
+        if($request->from_date == null || $request->to_date == null){
             // dd(1);
             $min = Carbon::now()->format('Y-m-d');
             $max = Carbon::now()->format('Y-m-d');
@@ -131,6 +132,7 @@ class LaporanController extends Controller
             ->join('bobot_akhir as b','b.id_karyawan','=','k.id_karyawan')
             ->join('perusahaan_partner as pn','pn.id_perusahaan','=','k.id_perusahaan')
             ->whereBetween('tanggal_bobot',array($min, $max))
+            ->where('id_pangkat', $id)
             ->orderBy('bobot_akhir','desc')->groupBy('id_karyawan','nama_karyawan','id_pangkat','nama_perusahaan')
             ->get();
             $nilai_kriteria = nilai_kriteria::select('id_kriteria','nilai_kriteria.id_karyawan',bobot_kriteria::raw('avg(bobot_kriteria) as nilai_kriteria'))->

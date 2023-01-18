@@ -1,11 +1,43 @@
 @extends('layouts.default')
 @section('title','Data user')
-@section('header-title','Penilaian')
+@section('header-title','Penilaian Team Leader')
 
 @section('content')
     <div class="card shadow mb-4">
+    
         <div class="card-body">
-        <h3 class="float-right card-title h4 mb-4 text-gray-800">Tanggal : {{$tanggal}}</h3>
+        <div class="d-flex justify-content-end">
+        <form action="{{route('penilaian_manajer.date_cari')}}"method="post" >
+            @csrf    
+            
+            <div class="form-inline">
+                
+                <div class="mb-3 form-group">
+                    <label for="inputPassword" class="col-sm-4 pr-0 pl-0  col-form-label">Tanggal</label>
+                    <div class="col-sm-8 input-group date pr-0 pl-0" id="date">
+                        <input type="text" value="{{$tanggal}}"  name="date" class="form-control @error('date') is-invalid @enderror"  id="date" placeholder="Tanggal ">
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-white"> 
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>            
+                        <!-- <input type="text" class="form-control" id="max" name="max"> -->
+                    </div>
+                    @error('date')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+                
+                <div class="mb-3 form-group ml-2" >
+                    <button type="submit" id="btn-seleksi" class="btn btn-success">cari</button>
+                </div>
+                
+            </div>
+            </form>
+        </div>
+        <!-- <h3 class="float-right card-title h4 mb-4 text-gray-800">Tanggal : {{$tanggal}}</h3> -->
             <div class="table-responsive">
             @if ($message = Session::get('sukses'))
                 <div class="alert alert-success alert-block">
@@ -129,6 +161,14 @@
     <script src="{{asset('assets/js/demo/datatables-demo.js')}}"></script>
     
     <script>
+
+        $(function() {
+            $('#date').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose:true
+            });
+        });
+
         $('.btn-hapus').on('click', function(e){
             e.preventDefault();
             let id = $(this).data('id');

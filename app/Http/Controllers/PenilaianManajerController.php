@@ -40,6 +40,41 @@ class PenilaianManajerController extends Controller
         // $perusahaan = Perusahaan::get();
         return view('pages.penilaian_manajer.index',['nilai_kriteria'=>$nilai_kriteria,'nilai_sub_kriteria'=>$nilai_sub_kriteria,'karyawan'=>$karyawan,'tanggal'=>$tanggal]);
     }
+    public function date_cari(Request $request){
+        $messages= [
+            'required' => 'data wajib diisi!!!',
+            'between' => 'Nilai harus di isi dari :min - :max bukan :input!!!',
+            'min' => ':nilai harus diisi minimal :min karakter!!!',
+            'max' => ':nilai harus diisi maksimal :max karakter!!!',
+            'date'=> ':Nilai inputan harus diisi dengan tanggal',
+            
+        ];
+        $request->validate([
+            "date" => ['required','date'],
+        ],$messages);
+        $karyawan = DB::table('karyawan as k')
+        ->select('pk.nama_pangkat','pp.nama_perusahaan','k.id_karyawan','k.nama_karyawan','k.jenis_kelamin')
+        ->join('kontrak_karyawan as kk','k.id_karyawan','=','kk.id_karyawan')->
+        join('pangkat_karyawan as pk','k.id_pangkat','=','pk.id_pangkat_karyawan')->
+        join('perusahaan_partner as pp', 'k.id_perusahaan','=','pp.id_perusahaan')
+        ->where('kk.status','A')
+        ->where('k.id_pangkat','1')
+        ->get();
+        // ->groupBy('k.id_pangkat','k.id_karyawan','k.id_perusahaan','k.nama_karyawan','k.email','k.no_hp','k.jenis_kelamin','k.alamat','k.tanggal_lahir','k.created_at','k.updated_at')
+        // ->leftJoin('nilai_sub_kriteria as ns','k.id_karyawan','=','ns.id_karyawan')
+        $tanggal = $request->date;
+        // dd($tanggal);
+        $nilai_kriteria = nilai_kriteria::where('id_user',Auth::user()->id)
+        ->where('tanggal_nilai',$request->date)
+        ->get();
+        $nilai_sub_kriteria=nilai_sub_kriteria::where('id_user',Auth::user()->id)
+        ->where('tanggal_nilai',$request->date)->get();
+        // dd($karyawan);
+        // dd($nilai_kriteria);
+        // $perusahaan = Perusahaan::get();
+        return view('pages.penilaian_manajer.index',['nilai_kriteria'=>$nilai_kriteria,'nilai_sub_kriteria'=>$nilai_sub_kriteria,'karyawan'=>$karyawan,'tanggal'=>$tanggal]);
+        // dd($request->date);
+    }
     public function create($id){
         $karyawan = karyawan::find($id);
         if($karyawan->id_pangkat==2){
