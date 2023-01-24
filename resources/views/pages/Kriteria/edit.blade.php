@@ -3,6 +3,16 @@
 @section('header-title','Edit Kriteria')
 
 @section('content')
+<div class="row">
+        <div class="col-md-12 ">
+            <h3>Tentukan Nilai Perbandingan Kriteria</h3>
+                <p>
+                    Untuk Menentukan Nilai Perbandingan Kriteria kamu dapat 
+                    mengisi nilai 1 - 9 dari nilai 1 kurang penting sampai dengan nilai 9 sangat penting
+                </p>
+                                
+        </div>
+</div>
 <div class="card shadow mb-4 col-lg-6">
     <div class="card-body">
         <br/>

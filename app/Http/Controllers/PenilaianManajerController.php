@@ -480,6 +480,7 @@ class PenilaianManajerController extends Controller
         ->join('users as u', 'u.id','=','nk.id_kriteria')
         ->where('k.id_pangkat','1')
         ->where('id_user',Auth::user()->id)
+        ->orderBy('k.id_karyawan','asc')
         ->get();
         $user = array();
         $id_karyawan = array();
@@ -487,6 +488,7 @@ class PenilaianManajerController extends Controller
         $id = array();
         $i= 0;
         // dd($nilaikriteria);
+        // echo "tes";
         foreach($kriteria as $k){
             $id_cek=0;
             $j = 0;
@@ -497,12 +499,13 @@ class PenilaianManajerController extends Controller
                     // $gologan[$i] = $nk->golongan;
                     $user[$i][$j] = $nk->id_user;
                     $id_cek = $k->id_kriteria;
-                    echo $j;
+                    // echo $j;
+                    echo $saw[$i][$j]." _ ";
                     $j++;
                 }
                 
-                // echo $saw[0][$j]." _ ".$id[$j]." __ ";
-                // echo $i;
+                
+                echo "<br>";
             }
             if($id_cek == 0){
                 
@@ -510,6 +513,7 @@ class PenilaianManajerController extends Controller
                     $saw[$i][$j] = $jumlah_bobot[$i][$j];
                     $user[$i][$j] = 0;
                     $id[$i][$j] =0  ;
+                    echo $saw[$i][$j]." _ ";
                 }
                 $i++;
             }else{
@@ -518,7 +522,7 @@ class PenilaianManajerController extends Controller
         }
         
         // dd($user);
-        
+        // dd($saw);
         // min max 
         $nilai_max_min = array();
         for($i=0; $i<count($saw); $i++){
@@ -548,21 +552,22 @@ class PenilaianManajerController extends Controller
             }
             echo "<br>";
         }
-        // dd($saw);
+        // dd($normalisasi);
         //ambil nilai bobot
+        $kriteria = Kriteria::get();
         $KriteriaController = new KriteriaController();
-        $bobot = $bobot = $KriteriaController->HitungBobotKriteria($kriteria);;
+        $bobot =$KriteriaController->HitungBobotKriteria($kriteria);;
         
         // dd($user);
         // dd($saw);
         $nilai_bobot = array();
-        
+        // dd($bobot);
         // hitung bobot
         for ($i=0; $i <count($saw) ; $i++) { 
             // $jumlah[$i]=0;
             for($j=0;$j<count($saw[$i]); $j++){
             //    dd(round($bobot[$i]));
-                $nilai_bobot[$i][$j] = $normalisasi[$i][$j]*round($bobot[$i],2);
+                $nilai_bobot[$i][$j] = number_format($normalisasi[$i][$j]*$bobot[$i],2);
                 
                 if($id[$i][$j]==0){
 
@@ -605,13 +610,15 @@ class PenilaianManajerController extends Controller
             
             $jumlah_bobot[$i] = 0;
             for($j=0;$j<count($saw); $j++){
-                $jumlah_bobot[$i] += number_format($nilai_bobot[$j][$i] * 100,2);
+                $jumlah_bobot[$i] +=  number_format($nilai_bobot[$j][$i]*10,2);
+                // echo $jumlah_bobot[$j][$i]."  ";
 
             }
-            
+            $jumlah_bobot [$i] = $jumlah_bobot[$i]-0.01;
             echo $jumlah_bobot[$i]." ";
             // echo "<br>";
         }
+        // dd($jumlah_bobot);
         $karyawan = karyawan::where('id_pangkat','1')->get();
         // dd($nilaikriteria);
         // dd($karyawan);
@@ -641,14 +648,14 @@ class PenilaianManajerController extends Controller
                     bobot_akhir::create([
                         'id_karyawan' => $id_karyawan[$i],
                         'id_user'=>$id_user[$i],
-                        'bobot_akhir' =>$jumlah_bobot[$i],
+                        'bobot_akhir' =>round( $jumlah_bobot[$i],2),
                         'tanggal_bobot'=>$tgl,
                     ]);
                 }else{
                     // dd($jumlah_bobot[$i]);
                     bobot_akhir::where('id_karyawan',$id_karyawan[$i])
                     ->where('tanggal_bobot',$tgl)->where('id_user',$id_user[$i])->update([
-                        'bobot_akhir' =>$jumlah_bobot[$i],
+                        'bobot_akhir' =>round($jumlah_bobot[$i],2),
                     ]);
                 }
         }
@@ -705,7 +712,7 @@ class PenilaianManajerController extends Controller
             }
             //  dd(count($cekkaryawan));
             // dd($user);
-
+            // dd($saw);
             // mencari nilai max or min 
             $niali_max_min = array();
             for ($i=0; $i <count($saw) ; $i++) { 
@@ -737,7 +744,7 @@ class PenilaianManajerController extends Controller
                 }
                 // echo "<br>";
             }
-            
+            // dd($normalisasi);
             //ambil nilai bobot
             $subkriteria = SubKriteria::where('id_kriteria',$id_kriteria)->get();
             $bobot = array();

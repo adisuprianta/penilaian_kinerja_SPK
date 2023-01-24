@@ -14,7 +14,7 @@ class SubKriteriaController extends Controller
     // }
     public function show($id){
         // return "a";
-        
+        $kriteria = Kriteria::find($id);
         $subkriteria = SubKriteria::where("id_kriteria",$id)->get();
         return view("pages.subkriteria.index",["id"=>$id,"subkriteria"=>$subkriteria,"kriteria"=>$kriteria]);
     }
@@ -48,6 +48,14 @@ class SubKriteriaController extends Controller
         Alert::success('sukses','Berhasil menginputkan data');
         return redirect(route('sub_kriteria.show',$id));
         // return $request->kriteria;
+    }
+    public function destroy($id){
+        $subkriteria=SubKriteria::find($id);
+        dd($subkriteria);
+        $subkriteria->delete();
+
+        Alert::success('Sukses', "User dengan nama  berhasil dihapus");
+        return redirect()->back();
     }
     public function HitungBobotSubKriteria($kriteria){
         

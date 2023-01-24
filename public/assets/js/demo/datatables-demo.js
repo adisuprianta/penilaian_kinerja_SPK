@@ -8,3 +8,12 @@ $(document).ready(function() {
     responsive: true,
   });
 });
+$(document).ready(function() {
+  $('#dataTable1').DataTable({
+    "language":{
+        "url" : "/assets/vendor/datatables/indonesia.json",
+        "sEmptyTable" : "Tidads"
+    },
+    responsive: true,
+  });
+});

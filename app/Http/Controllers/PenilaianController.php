@@ -706,7 +706,7 @@ class PenilaianController extends Controller
             for($j=0;$j<count($saw); $j++){
                 $jumlah_bobot[$i] += number_format($nilai_bobot[$j][$i] * 100,2);
             }
-            
+            $jumlah_bobot [$i] = $jumlah_bobot[$i]-0.01;
             echo $jumlah_bobot[$i]." _";
             // echo "<br>";
         }

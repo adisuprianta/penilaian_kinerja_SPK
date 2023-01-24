@@ -61,10 +61,10 @@
                                     </i>
                                     Ubah
                                 </a>
-                                <form action="" method="post" class="d-inline" id="{{'form-hapus-transaksi-'.$k->id}}">
+                                <form action="{{'sub_kriteria.destroy',$k->id}}" method="post" class="d-inline" id="{{'form-hapus-subkriteria-'.$k->id_sub_kriteria}}">
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger btn-sm btn-hapus" data-id="{{$k->id}}"  type="submit">
+                                    <button class="btn btn-danger btn-sm btn-hapus" data-id="{{$k->id_sub_kriteria}}" data-username="{{$k->nama_sub_kriteria}}"  type="submit">
                                         <i class="fas fa-trash"></i>
                                         Hapus
                                     </button>
@@ -96,7 +96,7 @@
         $('.btn-hapus').on('click', function(e){
             e.preventDefault();
             let id = $(this).data('id');
-            let form = $('#form-hapus-user-'+id);
+            let form = $('#form-hapus-subkriteria-'+id);
             let username = $(this).data('username');
 
             Swal.fire({

@@ -90,7 +90,7 @@ class LaporanController extends Controller
             
         }
         $subkriteria = SubKriteria::get();
-        if($request->from_date == null || $request->to_date == null){
+        if($request->from_date == null && $request->to_date == null){
             // dd(1);
             $min = Carbon::now()->format('Y-m-d');
             $max = Carbon::now()->format('Y-m-d');

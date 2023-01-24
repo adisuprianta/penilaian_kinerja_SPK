@@ -97,7 +97,7 @@ class KriteriaController extends Controller
         // menghitung bobot kriteria
         //$bobot = array();
         for($i=0;$i<count($jumlah);$i++){
-            $bobot[$i]=$jm[$i]/count($jm);
+            $bobot[$i]=number_format($jm[$i]/count($jm),4);
         }
         // dd($bobot);
         $row=0;

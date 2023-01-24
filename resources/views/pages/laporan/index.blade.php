@@ -147,7 +147,7 @@
                                     @endif
                                 @endif
                             @endforeach
-                            <th  class="align-middle text-center text-capitalize">{{number_format($k->bobot_akhir/10,2)}}</th>
+                            <th  class="align-middle text-center text-capitalize">{{number_format($k->bobot_akhir/10,2) - 0.01}}</th>
                         </tr>
                         
                     @endforeach
