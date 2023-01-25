@@ -61,7 +61,7 @@
                                     </i>
                                     Ubah
                                 </a>
-                                <form action="{{'sub_kriteria.destroy',$k->id}}" method="post" class="d-inline" id="{{'form-hapus-subkriteria-'.$k->id_sub_kriteria}}">
+                                <form action="{{route('sub_kriteria.destroy',$k->id_sub_kriteria)}}" method="post" class="d-inline" id="{{'form-hapus-subkriteria-'.$k->id_sub_kriteria}}">
                                     @method('DELETE')
                                     @csrf
                                     <button class="btn btn-danger btn-sm btn-hapus" data-id="{{$k->id_sub_kriteria}}" data-username="{{$k->nama_sub_kriteria}}"  type="submit">

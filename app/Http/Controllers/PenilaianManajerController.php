@@ -479,6 +479,7 @@ class PenilaianManajerController extends Controller
         ->join('kriteria_ahp as nsk', 'nk.id_kriteria' ,'=','nsk.id_kriteria')
         ->join('users as u', 'u.id','=','nk.id_kriteria')
         ->where('k.id_pangkat','1')
+        ->where('tanggal_nilai',$tgl)
         ->where('id_user',Auth::user()->id)
         ->orderBy('k.id_karyawan','asc')
         ->get();
@@ -489,6 +490,9 @@ class PenilaianManajerController extends Controller
         $i= 0;
         // dd($nilaikriteria);
         // echo "tes";
+        if(count($nilaikriteria)==0){
+            return 0;
+        }
         foreach($kriteria as $k){
             $id_cek=0;
             $j = 0;

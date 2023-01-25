@@ -51,9 +51,11 @@ class SubKriteriaController extends Controller
     }
     public function destroy($id){
         $subkriteria=SubKriteria::find($id);
-        dd($subkriteria);
+        // dd($subkriteria);
+        $id_kriteria = $subkriteria->id_kriteria;
         $subkriteria->delete();
-
+        $kriteria = SubKriteria::where("id_kriteria",$id_kriteria)->get();
+        $this->HitungBobotSubKriteria($kriteria);
         Alert::success('Sukses', "User dengan nama  berhasil dihapus");
         return redirect()->back();
     }

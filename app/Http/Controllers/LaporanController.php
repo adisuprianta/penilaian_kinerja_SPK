@@ -141,7 +141,7 @@ class LaporanController extends Controller
             ->where('id_pangkat', $id)
             ->whereBetween('tanggal_nilai',array($min, $max))
             ->groupBy('id_karyawan','id_kriteria')->get();
-            // dd($nilai_kriteria);
+            // dd($id);
             // ->avg('nilai_kriteria');
             $nilai_sub_kriteria=nilai_sub_kriteria::
             select('id_sub_kriteria','nilai_sub_kriteria.id_karyawan',bobot_sub_kriteria::raw('avg(bobot_kriteria) as nilai_sub_kriteria'))->
@@ -213,8 +213,8 @@ class LaporanController extends Controller
             ->groupBy('id_karyawan','id_sub_kriteria')
             ->get();
         // dd(1);
-        $pdf= PDF::loadview('pages.laporan.index_pdf',['id'=>$id,'min'=>$min,'max'=>$max,'karyawan'=>$karyawan,'nilai_sub_kriteria'=>$nilai_sub_kriteria,'nilai_kriteria'=>$nilai_kriteria,'kriteria'=>$kriteria,'subkriteria'=>$subkriteria])->setPaper('a3', 'landscape');
-        // return view('pages.laporan.index_pdf',['min'=>$min,'max'=>$max,'karyawan'=>$karyawan,'nilai_sub_kriteria'=>$nilai_sub_kriteria,'nilai_kriteria'=>$nilai_kriteria,'kriteria'=>$kriteria,'subkriteria'=>$subkriteria]);
+        $pdf= PDF::loadview('pages.laporan.index_pdf',['id'=>$id,'min'=>$min,'max'=>$max,'karyawan'=>$karyawan,'nilai_sub_kriteria'=>$nilai_sub_kriteria,'nilai_kriteria'=>$nilai_kriteria,'kriteria'=>$kriteria,'subkriteria'=>$subkriteria]);
+        // return view('pages.laporan.index_pdf',['min'=>$min,'id'=>$id,'max'=>$max,'karyawan'=>$karyawan,'nilai_sub_kriteria'=>$nilai_sub_kriteria,'nilai_kriteria'=>$nilai_kriteria,'kriteria'=>$kriteria,'subkriteria'=>$subkriteria]);
         return $pdf->download('Laporan-Kinerja-Karyawan.pdf');
         // $karyawan=karyawan::join('pangkat_karyawan','id_pangkat','=','id_pangkat_karyawan')->join('perusahaan_partner as p', 'p.id_perusahaan','=','karyawan.id_perusahaan')->get();
         // $pdf= PDF::loadview('pages.laporan.te',['karyawan'=>$karyawan])->setPaper('a4', 'landscape');

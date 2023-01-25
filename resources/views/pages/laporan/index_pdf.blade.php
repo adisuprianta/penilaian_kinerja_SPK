@@ -108,57 +108,26 @@
 
 </head>
 
-<body >
-    <div class="card shadow mb-4">
+<body>
+<div class="card shadow mb-4">
         @if($id==2)
-        <h3 class="judul-grafik">TABEL RANGKING KARYAWAN</h3>
+            <h3 class="judul-grafik">TABEL RANGKING KARYAWAN</h3>
         @else
-        <h3 class="judul-grafik">TABEL RANGKING TEAM LEADER</h3>
+            <h3 class="judul-grafik">TABEL RANGKING TEAM LEADER</h3>
         @endif
         <div class="card-body">
-            
             <div class="table-responsive">
-                
-                <<table class="table table-striped table-bordered dataTable" id="dataTable">
-                <thead>
-                        
+                <table class="table table-striped table-bordered dataTable" id="dataTable">
+                    <thead>
                         <tr>
-                            <th rowspan="2" class="align-middle text-center text-capitalize">No.</th>
-                            <th rowspan="2" class="align-middle text-center text-capitalize">nama karyawan</th>
-                            <th rowspan="2" class="align-middle text-center text-capitalize">Pangkat</th>
-                            <th rowspan="2" class="align-middle text-center text-capitalize">Perusahaan</th>
-                            @foreach($kriteria as $k)
-                                @php
-                                    $coll = 0;
-                                    $jum = 0;
-                                @endphp
-                                @foreach($subkriteria as $sk)
-                                    @if($k->id_kriteria == $sk->id_kriteria)
-                                        @php
-                                        $coll =$k->id_kriteria;   
-                                        $jum ++;
-                                        @endphp
-                                    @endif
-                                @endforeach
-                                @if($coll == $k->id_kriteria)
-                                    <th class="align-middle text-center text-capitalize" colspan="{{$jum}}">{{$k->nama_kriteria}} ( {{$k->bobot_kriteria}} ) ({{$k->golongan}}) </th>
-                                @else
-                                    <th rowspan="2" class="align-middle text-center text-capitalize">{{$k->nama_kriteria}}</th>
-                                @endif
-                            @endforeach
-                            <th rowspan="2" class="align-middle text-center text-capitalize">Nilai Akhir</th>
-                        </tr>
-                        <tr>
-                            @foreach($kriteria as $k)
-                                @foreach($subkriteria as $sk)
-                                    @if($k->id_kriteria == $sk->id_kriteria)
-                                        <th class="align-middle text-capitalize text-center" >{{$sk->nama_sub_kriteria}} </th>
-                                    @endif
-                                @endforeach
-                            @endforeach
+                            <th  class="align-middle text-center text-capitalize">No.</th>
+                            <th class="align-middle text-center text-capitalize">nama karyawan</th>
+                            <th  class="align-middle text-center text-capitalize">Pangkat</th>
+                            <th  class="align-middle text-center text-capitalize">Perusahaan</th>
+                            <th  class="align-middle text-center text-capitalize">Nilai Akhir</th>
+                            <th class="align-middle text-center text-capitalize">Kontrak Kerja</th>
                         </tr>
                     </thead>
-                    <tbody>
                     @foreach($karyawan as $k)
                         <tr>
                             <th  class="align-middle text-center text-capitalize">{{ $loop->iteration }}.</th>
@@ -171,62 +140,22 @@
                                 @endif
                             </th>
                             <th  class="align-middle text-center text-capitalize">{{$k->nama_perusahaan}}</th>
-                            @foreach($kriteria as $kr)
-                                @php
-                                    $coll = 0;
-                                    $jum = 0;
-                                @endphp
-                                @foreach($subkriteria as $sk)
-                                    @php
-                                        $cek = 0;
-                                    @endphp
-                                    @if($kr->id_kriteria == $sk->id_kriteria)
-                                        @foreach($nilai_sub_kriteria as $ns)
-                                            @if($ns->id_karyawan == $k->id_karyawan AND $sk->id_sub_kriteria == $ns->id_sub_kriteria ) 
-                                                <th class="align-middle text-center text-capitalize">{{number_format($ns->nilai_sub_kriteria*10,2)}}</th> 
-                                                @php
-                                                    $cek ++;
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                        @if($cek == 0)
-                                            <th></th>
-                                        @endif
-                                        @php
-                                            $coll =$kr->id_kriteria;   
-                                            $jum ++;
-                                        @endphp
-                                    @endif
-                                @endforeach
-                                <!-- <th>aa</th> -->
-                                @if($coll != $kr->id_kriteria )
-                                    @php
-                                        $cek = 0;
-                                    @endphp
-                                    @foreach($nilai_kriteria as $nk)
-                                        @if($nk->id_karyawan == $k->id_karyawan AND $kr->id_kriteria == $nk->id_kriteria ) 
-                                                @php
-                                                    $cek ++;
-                                                @endphp
-                                            <th class="align-middle text-center text-capitalize">{{number_format($nk->nilai_kriteria*10,2)}}</th>     
-                                        @endif
-                                    @endforeach
-                                    @if($cek == 0)
-                                        <th></th>
-                                    @endif
-                                @endif
-                            @endforeach
-                            <th  class="align-middle text-center text-capitalize">{{number_format($k->bobot_akhir/10,2- 0.01)}}</th>
+                            
+                            <th  class="align-middle text-center text-capitalize">{{number_format($k->bobot_akhir,2) }}</th>
+                            <th  class="align-middle text-center text-capitalize">
+                                @if(number_format($k->bobot_akhir/10,2) - 0.01 >= 0.6)
+                                    Perpanjang
+                                    @else
+                                    Tidak diperpanjang
+                                @endif    
+                            </th>
                         </tr>
                         
                     @endforeach
-                    </tbody>
                 </table>
             </div>
         </div>
-        
-    </div>
-
-    </body>
+</div>
+</body>
 
 </html>
