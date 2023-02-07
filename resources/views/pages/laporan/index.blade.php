@@ -79,7 +79,7 @@
                             
                             <th  class="align-middle text-center text-capitalize">{{number_format($k->bobot_akhir,2) }}</th>
                             <th  class="align-middle text-center text-capitalize">
-                                @if(number_format($k->bobot_akhir/10,2) - 0.01 >= 0.6)
+                                @if(number_format($k->bobot_akhir/10,2) >= 0.6)
                                     Perpanjang
                                     @else
                                     Tidak diperpanjang

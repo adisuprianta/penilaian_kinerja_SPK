@@ -24,13 +24,15 @@ class PerusahaanController extends Controller
             'date'=> ':Nilai inputan harus diisi dengan tanggal',
             
         ];
+        
         $request->validate([
             'nama' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:perusahaan_partner'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'nohp' => ['required', 'numeric' ],
             'kota'=>['required', 'string', 'max:255'],
             'alamat'=>['required','string','max:200'],
         ],$messages);
+        // dd($request->email);
         $perusahaan=Perusahaan::create([
             'nama_perusahaan'=>$request->nama,
             'alamat_perusahaan'=>$request->alamat,

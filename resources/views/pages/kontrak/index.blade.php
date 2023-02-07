@@ -44,7 +44,7 @@
                                     </a>   
                                     @else
                                       
-                                    <a class="btn btn-info btn-sm w-100 h-100 "  href="{{route('kontrak.edit',$k->id)}}">
+                                    <a class="btn btn-info btn-sm w-100 h-100 "  href="{{route('kontrak.edit',$k->id_kontrak)}}">
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Ubah
@@ -82,5 +82,31 @@
 
     <!-- Page level custom scripts -->
     <script src="{{asset('assets/js/demo/datatables-demo.js')}}"></script>
+    @include('sweetalert::alert')php artisan sweetalert:publish
+    <script>
+        $('.btn-hapus').on('click', function(e){
+            e.preventDefault();
+            let id = $(this).data('id');
+            let form = $('#form-hapus-kontrak-'+id);
+            let username = $(this).data('username');
+
+            Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: username +' akan dihapus',
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonColor: '#5bc0de',
+            confirmButtonColor: '#d9534f ',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal',
+            reverseButtons: true,
+            }).then((result) => {
+                if (result.value) {
+                    form.submit();
+                }
+            })
+
+        });
+    </script>
     
 @endpush

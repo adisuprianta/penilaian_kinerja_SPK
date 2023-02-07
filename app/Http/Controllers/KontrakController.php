@@ -56,6 +56,7 @@ class KontrakController extends Controller
     }
     public function edit($id){
         $kontrak = Kontrak_kerja::find($id);
+        // dd($id);
         $karyawan=karyawan::find($kontrak->id_karyawan);
         // dd($karyawan);
         return view('pages.kontrak.edit',['karyawan'=>$karyawan,'kontrak'=>$kontrak]);
@@ -89,6 +90,13 @@ class KontrakController extends Controller
         ]);
         $berkas->move(public_path().'/berkas_kontrak',$nama_berkas);
         Alert::success('sukses','Berhasil mengupdate data');
+        return redirect(route('kontrak.index'));
+    }
+    public function destroy($id){
+        $kontrak=Kontrak_kerja::find($id);
+        File::delete('berkas_kontrak/'.$kontrak->berkas_kontrak);
+        $kontrak->delete();
+        Alert::success('sukses','Berhasil menghapus data');
         return redirect(route('kontrak.index'));
     }
 }

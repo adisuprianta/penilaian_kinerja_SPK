@@ -934,7 +934,7 @@ class PenilaianController extends Controller
             $nilaikriteria = DB::table('karyawan as k')->join('nilai_kriteria as nk', 'k.id_karyawan' ,'=','nk.id_karyawan')
             ->join('kriteria_ahp as nsk', 'nk.id_kriteria' ,'=','nsk.id_kriteria')
             ->join('users as u', 'u.id','=','nk.id_kriteria')
-            ->where('k.id_pangkat','1')
+            ->where('k.id_pangkat','1')->where('tanggal_nilai',$tgl)
             // ->where('id_user',Auth::user()->id)
             ->get();
             if(count($nilaikriteria)== 0){
@@ -945,7 +945,7 @@ class PenilaianController extends Controller
             $saw = array();
             $id = array();
             $i= 0;
-            // dd(count($jumlah_bobot));
+            // dd($nilaikriteria);
             foreach($kriteria as $k){
                 $id_cek=0;
                 $j = 0;
@@ -1056,7 +1056,8 @@ class PenilaianController extends Controller
                 echo "<br>";
 
             }
-            // dd($nilai_bobot);
+            // dd(count($nilai_bobot));
+            // dd($saw);
             // dd($id);
             $jumlah_bobot = array();
             for($i=0; $i<count($saw[0]); $i++){

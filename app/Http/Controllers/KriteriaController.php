@@ -136,15 +136,19 @@ class KriteriaController extends Controller
         ]);
         $kriteria = Kriteria::get();
         $this->HitungBobotkriteria($kriteria);
-
+        
         Alert::success('sukses','Berhasil mengupdate data');
         return redirect(route('kriteria.index'));
     }
 
     public function destroy($id){
-        $kriteria =Kriteria::find();
+        $kriteria =Kriteria::find($id);
         $kriteria->delete();
         $kriteria = Kriteria::get();
+        if($kriteria->isEmpty()){
+            Alert::success('sukses','Berhasil delete data');
+            return redirect(route('kriteria.index'));
+        }
         $this->HitungBobotKriteria($kriteria);
         Alert::success('sukses','Berhasil delete data');
         return redirect(route('kriteria.index'));

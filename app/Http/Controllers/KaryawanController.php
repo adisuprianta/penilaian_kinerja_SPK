@@ -30,7 +30,7 @@ class KaryawanController extends Controller
     public function destroy($id){
         $karyawan = karyawan::find($id);
         $karyawan->delete();
-        Alert::success('sukses','Berhasil menginputkan data');
+        Alert::success('sukses','Berhasil menghapus data');
         return redirect(route('karyawan.index'));
     }
     public function create(){
@@ -93,7 +93,7 @@ class KaryawanController extends Controller
         // ]);
         // dd($karyawan);
         // $berkas->move(public_path().'/berkas_kontrak',$nama_berkas);
-        Session::flash('sukses','Berhasil menginputkan data');
+        Alert::success('sukses','Berhasil menginputkan data');
         return redirect(route('karyawan.index'));
     }
     public function edit($id){
